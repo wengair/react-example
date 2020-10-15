@@ -12,10 +12,16 @@ One benefit is if you changed something, you don't need to rerun the command. Lo
 You would want to `control + c` to stop and run `npm start` again if you have some relatively important change.  
 E.g. changing something in HTML's `<head>`.  
 
+## You would want to checkout these files
+[src/App.js](https://github.com/wengair/react-example/blob/index-example/src/App.js)  
+[src/components/Nav.js](https://github.com/wengair/react-example/blob/index-example/src/components/Nav.js)  
+[src/components/Landing.js](https://github.com/wengair/react-example/blob/index-example/src/components/Landing.js)  
+
 ## Something I feel important for CS 561 project
 Reference: [Turotial](https://www.youtube.com/watch?v=QFaFIcGhPoM&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&fbclid=IwAR1N0ilYIlqKN-w0K209nCxnJ3MHTu8isboa-aMB5V6xLoUbMCpOqM8MZ9k)  
 You can skip video 22 ~ 35 since they’re talking about class and I suggest not to use it in our project. (explanation is in video 7)  
 You would like to follow the practice from video 44.  
+
 ### Basic concept
 #### Functional Programming
  - React has 2 ways to generate a piece of HTML code: Class of Function.  
