@@ -1,68 +1,137 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# This is an example of React app
+## What I did before
+`$ npx create-react-app react-example`
+This command will generate a boilerplate like the master branch.  
 
-## Available Scripts
+## How to check your work
+`$ npm install`
+Run this command to install all necessary libraries.  
+`$ npm start`
+This command will run the app and you can open [http://localhost:3000](http://localhost:3000) to view it in the browser.  
+One benefit is if you changed something, you don't need to rerun the command. Localhost will change it automatically.  
+You would want to `control + c` to stop and run `npm start` again if you have some relatively important change.  
+E.g. changing something in HTML's `<head>`.  
 
-In the project directory, you can run:
+## Something I feel important for CS 561 project
+Reference: [Turotial](https://www.youtube.com/watch?v=QFaFIcGhPoM&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&fbclid=IwAR1N0ilYIlqKN-w0K209nCxnJ3MHTu8isboa-aMB5V6xLoUbMCpOqM8MZ9k)  
+You can skip video 22 ~ 35 since they’re talking about class and I suggest not to use it in our project. (explanation is in video 7)  
+You would like to follow the practice from video 44.  
+### Basic concept
+#### Functional Programming
+ - React has 2 ways to generate a piece of HTML code: Class of Function.
+I recommend using Function since it's basically as same as what we know about a function (write the repeated part once and call it many times).
+In React, this kind of function called `component`, you can consider it as a special function that returns HTML.
+Here's how a function component looks like.
+```
+import React from 'react'
 
-### `yarn start`
+function app() {
+  // Here's the Logic part
+  // You can write JavaScript here and even make as many function as you want
+  return (
+    <div>
+      {/* Here's the HTML part */}
+      {/* you can blend some {JavaScript} here to dynamically generate HTML, like the following line*/}
+      {recipes.map(recipe => <li>{recipe.name}</li>)}
+    </div>
+  )
+}
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+export default app
+```
+ - One important thing is one component can only return `one HTML element`.
+So if you want to return 2 divs, you need to use [Fragments](https://reactjs.org/docs/fragments.html) and the code would looks like this
+```
+return (
+  <>
+    <div>First element</div>
+    <div>Second element</div>
+  </>
+)
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+#### useState
+ - Because react would draw one page many times, the value defined by JS way like `let x=1` will be washed out.  
+For example, if you have the following code in the logic part
+```
+let x = 1
+console.log(x)
+x = 2
+console.log(x)
+```
+When you open the page and check dev tool, you might see something like
+```
+1
+2
+1
+2
+1
+2
+```
+ - All variables declared with `useState` are called `State`.  
+You can consider `useState`  as a React way to declare a variable, for example
+```
+const [saving, setSaving] = useState(false)
+```
+`saving` is the new variable
+We can only use `setSaving` to change the value of `saving`, something like `saving = true` is not allowed.
+One drawback is `setSaving` can not change the value immediately.  
+This is due to how React design to enhance performance.  
+In order to speed up, they will update state variables together, as a result, it will delay a little bit and can't use the new value right away.
+There's always a workaround like declaring a new variable and use it.
 
-### `yarn test`
+#### useEffect
+ - React works like “draw something first, then change it (rerender)“, and `useEffect` is the function that triggers the rerender.   Usually, data fetching would be placed in here.
+Here's how it looks like
+```
+useEffect(() => {
+  // effect
+  return () => {
+    // cleanup
+  }
+}, [])
+```
+`effect` is where you write the logic like `fetch`
+You would seldom write the `cleanup` part, it's totally fine to delete the whole return.
+`[]` lists all state variables you want to listen to.  
+For example, you can set it as `[refresh]`, and this useEffect would be triggered automatically once and every time when the value of `refresh` changes.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### useContext (optional)
+A hook that can replace redux, it allows us to use some values without passing them through components, a good place to store user information.
 
-### `yarn build`
+#### useInput (optional)
+Getting the value from forms in React is a little bit annoying.  
+Basically, we need to create a state variable to store the value.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### userRef (optional)
+Only need to use it if you want to focus on a form field when user enter a page.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Library
+#### styled-jsx
+I use [styled-jsx](https://github.com/vercel/styled-jsx) to help us manage the CSS.  
+ - One drawback is it's not as convenient as the `.css` file because it doesn't have auto-complete.  
+But it's a great library that allows us to write CSS in the same file and only works for that single component, which means we don't need to worry about the `name collision` anymore.  
+ - It can also use the state variable to set the CSS so that we could worry less about CSS when this kind of change happens.  
+ - Since React can only return one element, we need to put it in the second layer.  
+Here's how it looks like
+```
+return (
+  <div className='nav-container'>
+    <img src={Logo} alt='App Logo' className='logo-img' />
+    <p>Sous Chef</p>
+    <button>Log in</button>
+    <style jsx>
+      {`
+      .nav-container {
+        height: 75px;
+        display: flex;
+      }
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+      .logo-img {
+        height: 50px;
+      }
+      `}
+    </style>
+  </div>
+)
+```
