@@ -98,7 +98,7 @@ console.log(x)
 x = 2
 console.log(x)
 ```
-When you open the page and check dev tool, you might see something like
+When you open the localhost in Chrome and check dev tool, you might see something like
 ```
 1
 2
