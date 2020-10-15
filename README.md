@@ -14,6 +14,15 @@ E.g. changing something in HTML's `<head>`.
 
 ## You would want to checkout these files
 [src/App.js](https://github.com/wengair/react-example/blob/index-example/src/App.js)  
+What happens here is I have 2 components, `Nav` and `Landing`, and I call them one by one.  
+Since both of them return HTML elements, it works just like we write a static HTML file, the `Landing`'s HTML would go after `Nav`'s HTML.  
+So inside here equals to
+```
+<body>
+  <div>Nav's content</div>
+  <div>Landing's content</div>
+</body>
+```
 [src/components/Nav.js](https://github.com/wengair/react-example/blob/index-example/src/components/Nav.js)  
 [src/components/Landing.js](https://github.com/wengair/react-example/blob/index-example/src/components/Landing.js)  
 
