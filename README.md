@@ -17,7 +17,7 @@ E.g. changing something in HTML's `<head>`.
 What happens here is I have 2 components, `Nav` and `Landing`, and I call them one by one.  
 Since both of them return HTML elements, it works just like we write a static HTML file, the `Landing`'s HTML would go after `Nav`'s HTML.  
 So inside here equals to
-```
+```HTML
 <body>
   <div>Nav's content</div>
   <div>Landing's content</div>
@@ -37,7 +37,7 @@ You would like to follow the practice from video 44.
 I recommend using Function since it's basically as same as what we know about a function (write the repeated part once and call it many times).  
 In React, this kind of function called `component`, you can consider it as a special function that returns HTML.  
 Here's how a function component looks like  
-```
+```JavaScript
 import React from 'react'
 
 function app() {
@@ -64,11 +64,35 @@ return (
   </>
 )
 ```
+ - Since all component is a function, we can also pass parameters to components.  
+ Here's the example
+ ```JavaScript
+// in App.js
+function App() {
+  return (
+    <>
+      <Nav login={true} userName={stateVariable} /> // ← here
+      <Landing />
+    </>
+  )
+}
 
+
+// in Nav.js
+function Nav({login, userName}) { // ← and here
+  return (
+    <div>
+      {login
+        ? <p>Hi! {userName}</p>
+        : <button>Log in</button>}
+    <div>
+  )
+}
+ ```
 #### useState
  - Because react would draw one page many times, the value defined by JS way like `let x=1` will be washed out.  
 For example, if you have the following code in the logic part
-```
+```JavaScript
 let x = 1
 console.log(x)
 x = 2
@@ -85,7 +109,7 @@ When you open the page and check dev tool, you might see something like
 ```
  - All variables declared with `useState` are called `State`.  
 You can consider `useState`  as a React way to declare a variable, for example
-```
+```JavaScript
 const [saving, setSaving] = useState(false)
 ```
 `saving` is the new variable
@@ -98,7 +122,7 @@ There's always a workaround like declaring a new variable and use it.
 #### useEffect
  - React works like “draw something first, then change it (rerender)“, and `useEffect` is the function that triggers the rerender.   Usually, data fetching would be placed in here.  
 Here's how it looks like
-```
+```JavaScript
 useEffect(() => {
   // effect
   return () => {
@@ -129,7 +153,7 @@ But it's a great library that allows us to write CSS in the same file and only w
  - It can also use the state variable to set the CSS so that we could worry less about CSS when this kind of change happens.  
  - Since React can only return one element, we need to put it in the second layer.  
 Here's how it looks like
-```
+```JavaScript
 return (
   <div className='nav-container'>
     <img src={Logo} alt='App Logo' className='logo-img' />
