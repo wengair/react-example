@@ -1,12 +1,12 @@
 # This is an example of React app
 ## What I did before
-`$ npx create-react-app react-example`
+`$ npx create-react-app react-example`  
 This command will generate a boilerplate like the master branch.  
 
 ## How to check your work
-`$ npm install`
+`$ npm install`  
 Run this command to install all necessary libraries.  
-`$ npm start`
+`$ npm start`  
 This command will run the app and you can open [http://localhost:3000](http://localhost:3000) to view it in the browser.  
 One benefit is if you changed something, you don't need to rerun the command. Localhost will change it automatically.  
 You would want to `control + c` to stop and run `npm start` again if you have some relatively important change.  
@@ -18,10 +18,10 @@ You can skip video 22 ~ 35 since they’re talking about class and I suggest not
 You would like to follow the practice from video 44.  
 ### Basic concept
 #### Functional Programming
- - React has 2 ways to generate a piece of HTML code: Class of Function.
-I recommend using Function since it's basically as same as what we know about a function (write the repeated part once and call it many times).
-In React, this kind of function called `component`, you can consider it as a special function that returns HTML.
-Here's how a function component looks like.
+ - React has 2 ways to generate a piece of HTML code: Class of Function.  
+I recommend using Function since it's basically as same as what we know about a function (write the repeated part once and call it many times).  
+In React, this kind of function called `component`, you can consider it as a special function that returns HTML.  
+Here's how a function component looks like  
 ```
 import React from 'react'
 
@@ -81,7 +81,7 @@ In order to speed up, they will update state variables together, as a result, it
 There's always a workaround like declaring a new variable and use it.
 
 #### useEffect
- - React works like “draw something first, then change it (rerender)“, and `useEffect` is the function that triggers the rerender.   Usually, data fetching would be placed in here.
+ - React works like “draw something first, then change it (rerender)“, and `useEffect` is the function that triggers the rerender.   Usually, data fetching would be placed in here.  
 Here's how it looks like
 ```
 useEffect(() => {
