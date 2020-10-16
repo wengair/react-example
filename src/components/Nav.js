@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../images/chef1.jpg'
+import Logo from '../images/logo.png'
 
 function Nav() {
   return (
@@ -9,10 +9,11 @@ function Nav() {
         <p className='logo-text'>Sous Chef</p>
       </div>
       <button className='login-btn'>Log in</button>
-      <style jsx>
+      <style jsx='true'>
         {`
         .nav-container {
           height: 75px;
+          padding: 0px 50px;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -43,6 +44,7 @@ function Nav() {
           color: var(--c-brown);
           font-size: 18px;
           margin-right: 20px;
+          cursor: pointer;
         }
         `}
       </style>
