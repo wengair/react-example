@@ -1,13 +1,16 @@
 import React from 'react'
 import Logo from '../images/logo.png'
+import {Link} from 'react-router-dom';
 
 function Nav() {
   return (
     <div className='nav-container'>
-      <div className='logo-container'>
-        <img src={Logo} alt='App Logo' className='logo-img' />
-        <p className='logo-text'>Sous Chef</p>
-      </div>
+      <Link to='/'>
+        <div className='logo-container'>
+          <img src={Logo} alt='App Logo' className='logo-img' />
+          <p className='logo-text'>Sous Chef</p>
+        </div>
+      </Link>
       <button className='login-btn'>Log in</button>
       <style jsx='true'>
         {`
@@ -21,6 +24,7 @@ function Nav() {
 
         .logo-container {
           display: flex;
+          text-decoration: none;
         }
 
         .logo-img {
@@ -33,6 +37,7 @@ function Nav() {
           margin: 0px;
           font-size: 48px;
           color: var(--c-brown);
+          text-decoration: none;
         }
         
         .login-btn {

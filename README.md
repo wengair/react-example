@@ -3,16 +3,28 @@
 `$ npx create-react-app react-example`  
 This command will generate a boilerplate like the master branch.  
 
-## How to check your work
+## How to use
+### Setup
+`$ git clone git@github.com:wengair/react-example.git`  
+Clone this repo to your computer.  
+Since we use the RESTful style to connect the frontend and backend, we need to install the library for both of them.
 `$ npm install`  
-Run this command to install all necessary libraries.  
-`$ npm start`  
+Run this command to install all the necessary libraries for the frontend.  
+Then enter the `backend` folder and `$ npm install` again to install all necessary libraries for the backend.  
+### During the development
+Since our frontend and backend are separated, you need to run `$ npm start` in both folders to make the site work properly.  
+Or you could only run the command in one folder if you don't need another one.  
+For frontend:  
 This command will run the app and you can open [http://localhost:3000](http://localhost:3000) to view it in the browser.  
 One benefit is if you changed something, you don't need to rerun the command. Localhost will change it automatically.  
 You would want to `control + c` to stop and run `npm start` again if you have some relatively important change.  
 E.g. changing something in HTML's `<head>`.  
 
-## You would want to checkout these files
+For backend:  
+This command will run the server and you can open [http://localhost:8080](http://localhost:8080) to view endpoints in the browser.  
+Unlike the frontend, you need to restart the server by `$ npm start` again if you make any change.
+
+## You would want to check out these files
 [src/App.js](https://github.com/wengair/react-example/blob/index-example/src/App.js)  
 What happens here is I have 2 components, `Nav` and `Landing`, and I call them one by one.  
 Since both of them return HTML elements, it works just like we write a static HTML file, the `Landing`'s HTML would go after `Nav`'s HTML.  
@@ -55,8 +67,8 @@ function app() {
 export default app
 ```
  - One important thing is one component can only return `one HTML element`.
-So if you want to return 2 divs, you need to use [Fragments](https://reactjs.org/docs/fragments.html) and the code would looks like this
-```
+So if you want to return 2 divs, you need to use [Fragments](https://reactjs.org/docs/fragments.html) and the code would look like this
+```JavaScript
 return (
   <>
     <div>First element</div>
@@ -174,3 +186,27 @@ return (
   </div>
 )
 ```
+
+## File Structure
+### Backend
+The root folder is the frontend folder so basically, the Backend folder is put inside the frontend folder.  
+`models` contains the table settings that we'll use in MongoDB  
+`receipeRecord` contains the data we get from Spoonacular  
+`services` contains files that are called in `server.js`  
+
+### Frontend
+`public` contains HTML files like favicon.  
+`src/components` contains small elements that can be used repeatedly in pages.  
+`src/hooks` contains all custom hook files.  
+`src/lib` contains util functions or config that can be used repeatedly in pages.  
+`src/views` contains the components that represent the whole page.  
+
+## Miscellaneous
+- Naming convention  
+  React component: camelcase starting with capital, e.g. SearchResult  
+  React custom hook: starts with use..., e.g. useInput  
+  JavaScript variable: camelcase, e.g. queryString  
+- Eslint is used for making sure our work maintains the same code style.  
+  You might find some warnings when you run `$ npm start`.  
+  It doesn't really affect any performance but it would be great if you could follow the instruction and fix the style issues.  
+- I included the `.env` since it's easier for us to develop, normally we shouldn't do that though.  
