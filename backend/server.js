@@ -1,4 +1,5 @@
 var express = require('express')
+const path = require("path");
 var app = express()
 // var mongoose = require('mongoose')
 
@@ -21,9 +22,13 @@ app.get('/recipeApp', (req, res) => {
   console.log('initial test of the app')
 })
 // require('./services/scada.js')
+app.use(express.static('../build'));
 
 var endpoints = require('./services/endpoints.js') // file name doesn't affect
 app.use('/api/v1', endpoints)
+app.use(function(req, res) {
+	res.sendFile(path.join(__dirname, ' ../build/index.html'));
+});
 
 // var android = require('./services/android.js')
 // app.use('/', android)
