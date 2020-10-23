@@ -11,6 +11,9 @@ const config = {
     domain: process.env.sousDomain,
     apiUrl: process.env.sousAPI + '/api/v1/',
   },
+  spoonacular: {
+    APIKey: process.env.spoonacularAPIKey
+  }
 }
 
 module.exports = config

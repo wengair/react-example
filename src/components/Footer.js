@@ -12,7 +12,7 @@ function Footer({developer}) {
 			display: flex;
 			align-items: center;
 			background-color: black;
-			position:absolute;
+			// position:absolute;
 			left:0;
 			bottom:0;
 			right:0;
