@@ -4,6 +4,7 @@ import BackgroundImg2 from '../images/splash2.png'
 import {Carousel} from 'react-responsive-carousel'
 import {useHistory} from 'react-router-dom'
 import SearchBar from '../components/SearchBar'
+import PopularRecipes from '../components/PopularRecipes'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 function Landing() {
@@ -21,18 +22,28 @@ function Landing() {
   }
   
   return (
-    <div className='landing-container'>
-      <div className='carousel-container'>
-        <Carousel showThumbs={false} showStatus={false} showArrows={false} infiniteLoop autoPlay dynamicHeight={false}>
-          {/* generate img tags for Carousel to show */}
-          {imgs.map((imgurl, idx) => <img src={imgurl} alt='background' key={idx} className='slide-img' />)}
-        </Carousel>
-      </div>
-      {/* I turned this search bar into a component since we'll use it twice */}
-      <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
-      <style jsx='true'>
+	<div className='landing-container'>
+		<div className='search-container'>
+		  <div className='carousel-container'>
+			<Carousel showThumbs={false} showStatus={false} showArrows={false} infiniteLoop autoPlay dynamicHeight={false}>
+			  {/* generate img tags for Carousel to show */}
+			  {imgs.map((imgurl, idx) => <img src={imgurl} alt='background' key={idx} className='slide-img' />)}
+			</Carousel>
+		  </div>
+		  
+		  {/* I turned this search bar into a component since we'll use it twice */}
+		  <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
+		  
+		</div>
+		
+		<div className='popular-container'>
+			<PopularRecipes />
+		</div>
+	 
+	  
+	  <style jsx='true'>
         {`
-        .landing-container {
+        .search-container {
           width: 100vw;
           height: calc(100vh - 75px);
           position: relative;
