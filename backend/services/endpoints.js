@@ -7,9 +7,9 @@ const fetch = require('node-fetch')
 const config = require('./config')
 // Body Parser Middleware
 const jsonParser = bodyParser.json()
-require('../models/dbSchema.js')
-require('../models/erp.js')
-// const recipes = require('../recipeRecord/findByIngredients')
+// require('../models/dbSchema.js')
+// require('../models/erp.js')
+const recipes = require('../recipeRecord/findByIngredients')
 const recipeInfo = require('../recipeRecord/recipeInformationWithNutrition')
 const {endpointError, logError} = require('./util')
 
@@ -23,33 +23,37 @@ app.use(function(req, res, next) {
 
 
 router.route('/findByIngredients').all(jsonParser).post(async (req, res) => {
-  const queryString = req.body.queryIngredients.join(',+')
-  try {
-    await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${queryString}&apiKey=${config.spoonacular.APIKey}`, {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-        },
-      })
-        .then(res => res.json())
-        .then(data => {
-          console.log(data)
-          if(!data.status) {
-            return res.send({
-              ok: true,
-              recipes: data,
-            })
-          }
-          else return res.send({
-            ok: false,
-            recipes: data,
-          })
-        })
-  }
-  catch(err) {
-    logError(500, 'Exception occurs in endpoint while trying to read this client.', err)
-    return endpointError(res, 500, 'InternalServerError', 'Something went wrong and this client could not be read.')
-  }
+  // const queryString = req.body.queryIngredients.join(',+')
+  // try {
+  //   await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${queryString}&apiKey=${config.spoonacular.APIKey}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         'content-type': 'application/json',
+  //       },
+  //     })
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         console.log(data)
+  //         if(!data.status) {
+  //           return res.send({
+  //             ok: true,
+  //             recipes: data,
+  //           })
+  //         }
+  //         else return res.send({
+  //           ok: false,
+  //           recipes: data,
+  //         })
+  //       })
+  // }
+  // catch(err) {
+  //   logError(500, 'Exception occurs in endpoint while trying to read this client.', err)
+  //   return endpointError(res, 500, 'InternalServerError', 'Something went wrong and this client could not be read.')
+  // }
+  return res.send({
+    ok: true,
+    recipes: recipes,
+  })
 })
 
 router.route('/recipe/:id').get(async (req, res) => {
