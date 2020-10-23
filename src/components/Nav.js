@@ -42,7 +42,7 @@ function Nav() {
         
         .login-btn {
           height: 30px;
-          width: 70px;
+          width: 80px;
           border: 2px solid var(--c-brown);
           border-radius: 20px;
           background-color: white;
