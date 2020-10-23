@@ -13,7 +13,8 @@ function Landing() {
   // import the image from src/images for Carousel to show
   const imgs = [
     BackgroundImg1,
-    BackgroundImg2]
+    BackgroundImg2,
+  ]
 
   const submitHandler = (e) => {
     // e.preventDefault()
@@ -30,17 +31,12 @@ function Landing() {
 			  {imgs.map((imgurl, idx) => <img src={imgurl} alt='background' key={idx} className='slide-img' />)}
 			</Carousel>
 		  </div>
-		  
 		  {/* I turned this search bar into a component since we'll use it twice */}
 		  <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
-		  
 		</div>
-		
 		<div className='popular-container'>
 			<PopularRecipes />
 		</div>
-	 
-	  
 	  <style jsx='true'>
         {`
         .search-container {
@@ -66,7 +62,7 @@ function Landing() {
         }
 
         .slide-img {
-          height: calc(100vh - 75px);
+          height: calc(100vh - 140px);
           object-fit: cover;
         }
         `}

@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../images/logo.png'
+import Logo from '../images/chef_logo.png'
 import {Link} from 'react-router-dom';
 
 function Nav() {
@@ -15,7 +15,7 @@ function Nav() {
       <style jsx='true'>
         {`
         .nav-container {
-          height: 75px;
+          height: 140px;
           padding: 0px 50px;
           display: flex;
           justify-content: space-between;
@@ -25,11 +25,12 @@ function Nav() {
         .logo-container {
           display: flex;
           text-decoration: none;
+          align-items: flex-end;
         }
 
         .logo-img {
-          height: 50px;
-          margin: 0px 15px;
+          height: 130px;
+          margin-right: -10px;
         }
 
         .logo-text {

@@ -1258,4 +1258,4 @@ const recipeInformationWithNutrition = [
   }
 ]
 
-module.exports = recipesByIngredent
+module.exports = recipeInformationWithNutrition

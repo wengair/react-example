@@ -3,18 +3,18 @@ import React from 'react'
 function PopularRecipes({developer}) {
   return (
     <div>
-		<div class="w3-display-container">
+		<div className="w3-display-container">
 		{/*Section: Content */}
-			<div class="w3-content w3-padding">
+			<div className="w3-content w3-padding">
 			{/*Section: Popular Recipes */}
-				<div class="w3-container w3-padding-32" id="popular_recipes">
+				<div className="w3-container w3-padding-32" id="popular_recipes">
 					{/* Section: Section Title*/}
 					<div className='popular-text'>Popular Recipes</div>
 					
 					{/* Section: Image Row */}
-					<div class="w3-row-padding w3-padding-16 w3-center" id="food">
+					<div className="w3-row-padding w3-padding-16 w3-center" id="food">
 						{/* Image */}
-						<div class="w3-quarter">
+						<div className="w3-quarter">
 							<a href="https://www.themediterraneandish.com/tabouli-salad/">
 							{/*<img style={{width:100%}} src={"https://www.themediterraneandish.com/wp-content/uploads/2016/03/Tabouli-Recipe-9.jpg"} alt="Tabouli"/>*/}
 							</a>
@@ -23,7 +23,7 @@ function PopularRecipes({developer}) {
 						</div>
 						
 						{/* Image */}
-						<div class="w3-quarter">
+						<div className="w3-quarter">
 							<a href="https://www.allrecipes.com/recipe/219024/best-mud-pie/">
 							{/*<img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F4536849.jpg&w=596&h=596" alt="Mud Pie" style={{width: 100%}}/>*/}
 							</a>
@@ -32,7 +32,7 @@ function PopularRecipes({developer}) {
 						</div>
 						
 						{/* Image */}
-						<div class="w3-quarter">
+						<div className="w3-quarter">
 							<a href="https://www.thekitchn.com/how-to-roast-any-vegetable-101221">
 							{/*<img src="https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fit,w_730,h_1022/k%2Farchive%2Ff30788d475aa6cbe2b72c143eab1a5d237ac45ec" alt="Roast Vegetables" style={{width:100%}}/>*/}
 							</a>
@@ -41,7 +41,7 @@ function PopularRecipes({developer}) {
 						</div>
 						
 						{/* Image */}
-						<div class="w3-quarter">
+						<div className="w3-quarter">
 							<a href="https://www.delish.com/cooking/recipe-ideas/recipes/a53296/easy-fish-taco-recipe/">
 							{/*<img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190307-fish-tacos-112-1553283299.jpg?crop=0.770xw:0.651xh;0.121xw,0.0179xh&resize=768:*" alt="Fish Tacos" style="width:100%"/>*/}
 							</a>

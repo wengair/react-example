@@ -1,5 +1,14 @@
 :root {
   --c-brown: #B68933;
+  --c-light-brown: #D1B756;
+}
+@font-face {
+  font-family:'Signika SC';
+  src:url('./fonts/Signika-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family:'Shanti';
+  src:url('./fonts/Shanti-Regular.ttf') format('truetype');
 }
 
 body {
