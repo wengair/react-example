@@ -15,7 +15,7 @@ function Nav() {
       <style jsx='true'>
         {`
         .nav-container {
-          height: 120px;
+          height: 140px;
           padding: 0px 50px;
           display: flex;
           justify-content: space-between;

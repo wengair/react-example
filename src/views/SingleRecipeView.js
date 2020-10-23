@@ -138,7 +138,7 @@ function SingleRecipeView({match}) {
         }
 
         .stripe {
-          width: 100vw;
+          width: 100%;
           height: 300px;
           background-color: var(--c-light-brown);
           position: absolute;
