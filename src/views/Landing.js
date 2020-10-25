@@ -39,6 +39,9 @@ function Landing() {
 		</div>
 	  <style jsx='true'>
         {`
+        .landing-container {
+          margin: 0px;
+        }
         .search-container {
           width: 100vw;
           height: calc(100vh - 75px);

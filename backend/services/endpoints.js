@@ -33,7 +33,6 @@ router.route('/findByIngredients').all(jsonParser).post(async (req, res) => {
   //     })
   //       .then(res => res.json())
   //       .then(data => {
-  //         console.log(data)
   //         if(!data.status) {
   //           return res.send({
   //             ok: true,
@@ -57,7 +56,7 @@ router.route('/findByIngredients').all(jsonParser).post(async (req, res) => {
 })
 
 router.route('/recipe/:id').get(async (req, res) => {
-  const recipeId = req.params.id
+  // const recipeId = req.params.id
   // try {
   //   await fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?includeNutrition=true&apiKey=${config.spoonacular.APIKey}`, {
   //       method: 'GET',
@@ -67,7 +66,6 @@ router.route('/recipe/:id').get(async (req, res) => {
   //     })
   //       .then(res => res.json())
   //       .then(data => {
-  //         console.log(data)
   //         if(!data.status) {
   //           return res.send({
   //             ok: true,

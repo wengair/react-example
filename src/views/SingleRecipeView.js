@@ -21,7 +21,7 @@ function SingleRecipeView({match}) {
     'Sodium',
   ]
 
-  const fetchOneRecipes = async () => {
+  const fetchOneRecipe = async () => {
     const recipeId = match.params.id
     fetch(urlJoin(config.sous.apiUrl, `/recipe/${recipeId}`), {
       method: 'GET',
@@ -39,7 +39,7 @@ function SingleRecipeView({match}) {
   }
   
   useEffect(() => {
-    fetchOneRecipes()
+    fetchOneRecipe()
   }, [])
 
   return (
@@ -108,7 +108,7 @@ function SingleRecipeView({match}) {
           <div className='row body-container'>
             <div className='instruction-container'>
               <p className='body-title'>Directions:</p>
-              {recipe.analyzedInstructions[0].steps.map((instruction, idx) => {
+              {recipe.analyzedInstructions[0]?.steps.map((instruction, idx) => {
                 return (
                   <>
                     <p className='body-text'>Step {idx + 1}</p>
@@ -148,10 +148,6 @@ function SingleRecipeView({match}) {
 
         .recipe-container {
           padding: 30px 11vw;
-        }
-
-        .row {
-          display: flex;
         }
 
         .recipe-img {

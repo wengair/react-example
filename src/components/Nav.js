@@ -24,6 +24,7 @@ function Nav() {
 
         .logo-container {
           display: flex;
+          height: 100%;
           text-decoration: none;
           align-items: flex-end;
         }

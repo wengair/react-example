@@ -3,6 +3,8 @@ import SearchBar from '../components/SearchBar'
 import {config} from '../lib/config'
 import {useHistory} from 'react-router-dom'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import {Link} from 'react-router-dom'
+import LikeIcon from '../images/like.svg'
 
 const urlJoin = require('url-join')
 
@@ -11,14 +13,16 @@ function SearchResult({location}) {
   // when redirected form landing page, the user's query will be put in location.state.queryString
   const history = useHistory()
   const [queryString, setQueryString] = useState(location.state.queryString)
+  const [refresh, setRefresh] = useState(false)
   const [recipies, setRecipies] = useState()
   
   // import the image from src/images for Carousel to show
 
   const submitHandler = (e) => {
-    // e.preventDefault()
+    e.preventDefault()
     // when user hit enter, redirect them to /result page with what they typed in the search bar
-    history.push({pathname: `/result`, state: {queryString: queryString}})
+    // history.push({pathname: `/result`, state: {queryString: queryString}})
+    setRefresh(true)
   }
 
 
@@ -37,84 +41,83 @@ function SearchResult({location}) {
       .then(res => res.json())
       .then(data => setRecipies(data.recipes))
   }
-
-  const fetchOneRecipies = async () => {
-    // fetch(urlJoin(config.sous.apiUrl, 'recipeInformationWithNutrition'), {
-    fetch(urlJoin(config.sous.apiUrl, '/recipe/553847'), {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json',
-      },
-      // body: JSON.stringify({
-      //   recipeId: 553847,
-      // }),
-    })
-      .then(res => res.json())
-      .then(data => console.log(data))
-  }
   
   useEffect(() => {
     fetchRecipies()
-    // fetchOneRecipies()
-  }, [])
-
+    return () => {
+      setRefresh(false)
+    }
+  }, [refresh])
 
   return (
     <div>
-      <div class = 'container-fluid'>
-      <div class = 'row justify-content-center' >
-      <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
-      </div>
+      <div className='searchbar-container'>
+        <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
       </div>
       {/* if recipes has value, print all recipies' title */}
       {/* we need "recipies &&" to not show anything since recipies will recieve data later (in useEffect) */}
-    <div className='SearchResult-container'>
-    <div className='wrapper'>   
-      {recipies && recipies.map(recipe => {  
-        return (  
+      <div className='result-wrapper'>
+        {recipies && recipies.map(recipe => {  
+          return (
+            <div className='recipe-card'>
+              <Link to={`/recipe/${recipe.id}`}>
+                <div>
+                  <img src= {recipe.image} className='recipe-img' />
+                  <div className='reicpe-text'>
+                    <p className='recipe-name'> {recipe.title} </p>
+                    <img src={LikeIcon} alt='like icon' className='like-icon'/>
+                  </div>
+                </div>
+              </Link>
+            </div>)
+        })}
+      </div>
+      <style jsx='true'>
+      {`
+      .searchbar-container {
+        display: flex;
+        justify-content: center;
+        padding-top: 30px;
+        padding-bottom: 45px;
+      }
 
-        <div>
-        <img src= {recipe.image} alt=""/>
-        <p> {recipe.title} </p>
-        </div>
-
-
-            )})}
-            </div>
-                    </div>
-      
-        <style jsx='true'>
-        {`
-
-        .SearchResult-container {
-        width: 100%;
-        height: 100%;
-        left: 100px;
-        top: 500px;
+      .result-wrapper {
         background: rgba(252, 209, 127, 0.26);
-        }
-        
-        .wrapper {
         display: grid;
-        grid-template-columns: 20% 20% 20%;
-        grid-template-rows: 20% 20% 20%;
-        gap: 10% 10%;
+        grid-template-columns: 1fr 1fr 1fr;
         padding: 50px;
-    grid-template-areas:
-    "wrapper wrapper wrapper"
-    "wrapper wrapper wrapper"
-    "wrapper wrapper wrapper";
-        }
+        min-height: calc(100vh - 400px);
+      }
+    
+      .container-fluid{
+        padding: 50px;
+        align: center;
+      }
+
+      .recipe-card {
+        padding: 10px;
+        object-fit: cover;
+      }
+      .recipe-img {
+        width: 100%;
+        
+      }
       
-        .container-fluid{
-          padding: 50px;
-          align: center;
-        }
-        
-        `}
-        
-        </style>
-        </div>
+      .reicpe-text {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .recipe-name {
+        margin: 0px;
+      }
+
+      .like-icon {
+        width: 20px;
+      }
+      `}
+      </style>
+    </div>
   )
 }
 
