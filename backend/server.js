@@ -26,12 +26,9 @@ app.use(express.static('../build'));
 
 var endpoints = require('./services/endpoints.js') // file name doesn't affect
 app.use('/api/v1', endpoints)
-app.use(function(req, res) {
-	res.sendFile(path.join(__dirname, ' ../build/index.html'));
-});
-
-// var android = require('./services/android.js')
-// app.use('/', android)
+// app.use(function(req, res) {
+// 	res.sendFile(path.join(__dirname, ' ../build/index.html'));
+// });
 
 // Setting up server
 var Port = process.env.PORT || 8080

@@ -28,3 +28,7 @@ code {
 a {
   text-decoration: none;
 }
+
+.row {
+  display: flex;
+}

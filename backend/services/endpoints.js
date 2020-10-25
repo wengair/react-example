@@ -33,7 +33,6 @@ router.route('/findByIngredients').all(jsonParser).post(async (req, res) => {
   //     })
   //       .then(res => res.json())
   //       .then(data => {
-  //         console.log(data)
   //         if(!data.status) {
   //           return res.send({
   //             ok: true,
@@ -67,7 +66,6 @@ router.route('/recipe/:id').get(async (req, res) => {
   //     })
   //       .then(res => res.json())
   //       .then(data => {
-  //         console.log(data)
   //         if(!data.status) {
   //           return res.send({
   //             ok: true,
