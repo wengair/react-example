@@ -52,7 +52,7 @@ function SearchResult({location}) {
   return (
     <div>
       <div className='searchbar-container'>
-        <SearchBar queryString={queryString} setQueryString={setQueryString} />
+        <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
       </div>
       {/* if recipes has value, print all recipies' title */}
       {/* we need "recipies &&" to not show anything since recipies will recieve data later (in useEffect) */}
@@ -80,12 +80,13 @@ function SearchResult({location}) {
         padding-top: 30px;
         padding-bottom: 45px;
       }
-      
+
       .result-wrapper {
         background: rgba(252, 209, 127, 0.26);
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         padding: 50px;
+        min-height: calc(100vh - 400px);
       }
     
       .container-fluid{
