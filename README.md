@@ -7,12 +7,12 @@ This command will generate a boilerplate like the master branch.
 ### Setup
 `$ git clone git@github.com:wengair/react-example.git`  
 Clone this repo to your computer.  
-Since we use the RESTful style to connect the frontend and backend, we need to install the library for both of them.
+Since we use the RESTful style to connect the frontend and backend, we need to install the library for both of them.  
 `$ npm install`  
-Run this command to install all the necessary libraries for the frontend.  
-Then enter the `backend` folder and `$ npm install` again to install all necessary libraries for the backend.  
+Run this command to install all the necessary libraries for the frontend (the root folder `/`).  
+Then enter the `/backend` folder and `$ npm install` again to install all necessary libraries for the backend.  
 ### During the development
-Since our frontend and backend are separated, you need to run `$ npm start` in both folders to make the site work properly.  
+Since our frontend and backend are separated, you need to run `$ npm start` in both folders (`/` and `/backend`) to make the site work properly.  
 Or you could only run the command in one folder if you don't need another one.  
 For frontend:  
 This command will run the app and you can open [http://localhost:3000](http://localhost:3000) to view it in the browser.  
