@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a0e2d67c.chunk.css",
+    "main.js": "/static/js/main.ca2c79a4.chunk.js",
+    "main.js.map": "/static/js/main.ca2c79a4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0e272397.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0e272397.js.map",
+    "static/css/2.fb346933.chunk.css": "/static/css/2.fb346933.chunk.css",
+    "static/js/2.bd32a259.chunk.js": "/static/js/2.bd32a259.chunk.js",
+    "static/js/2.bd32a259.chunk.js.map": "/static/js/2.bd32a259.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.0693065c59792f58ca5586ee0b049afd.js": "/precache-manifest.0693065c59792f58ca5586ee0b049afd.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.fb346933.chunk.css.map": "/static/css/2.fb346933.chunk.css.map",
+    "static/css/main.a0e2d67c.chunk.css.map": "/static/css/main.a0e2d67c.chunk.css.map",
+    "static/js/2.bd32a259.chunk.js.LICENSE.txt": "/static/js/2.bd32a259.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/Signika-Regular.1b24ac57.ttf",
+    "static/media/chef_logo.png": "/static/media/chef_logo.3dd6fa49.png",
+    "static/media/like.svg": "/static/media/like.7e28ec21.svg",
+    "static/media/pg3_calorie.svg": "/static/media/pg3_calorie.e6964105.svg",
+    "static/media/pg3_recipename.svg": "/static/media/pg3_recipename.64d8814d.svg",
+    "static/media/pg3_time.svg": "/static/media/pg3_time.1a2f14f2.svg",
+    "static/media/pg3_yield.svg": "/static/media/pg3_yield.521d0c86.svg",
+    "static/media/splash1.jpg": "/static/media/splash1.8460a925.jpg",
+    "static/media/splash2.png": "/static/media/splash2.9434ce63.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0e272397.js",
+    "static/css/2.fb346933.chunk.css",
+    "static/js/2.bd32a259.chunk.js",
+    "static/css/main.a0e2d67c.chunk.css",
+    "static/js/main.ca2c79a4.chunk.js"
+  ]
+}

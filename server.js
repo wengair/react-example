@@ -22,13 +22,13 @@ app.get('/recipeApp', (req, res) => {
   console.log('initial test of the app')
 })
 // require('./services/scada.js')
-app.use(express.static('../build'));
+app.use(express.static('./frontend/build'));
 
 var endpoints = require('./services/endpoints.js') // file name doesn't affect
 app.use('/api/v1', endpoints)
-// app.use(function(req, res) {
-// 	res.sendFile(path.join(__dirname, ' ../build/index.html'));
-// });
+app.get('/*',function(req, res) {
+	res.sendFile(path.join(__dirname, ' ./frontend/build/index.html'));
+ });
 
 // Setting up server
 var Port = process.env.PORT || 8080
