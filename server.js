@@ -8,7 +8,7 @@ const cors = require('cors')
 // mongoose.connect('mongodb://localhost:27017/hellodb')
 
 // general settings
-app.use(cors())
+// app.use(cors())
 app.use((req, res, next) => {
   // Enabling CORS
   res.header('Access-Control-Allow-Origin', '*')
