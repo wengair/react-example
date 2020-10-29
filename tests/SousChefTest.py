@@ -3,16 +3,16 @@ import selenium.common.exceptions as selEx
 from selenium.webdriver.common.keys import Keys
 import time
 
+# Backtrace messages, pass to tests to provide context
+message_home_page = "Testing home page."
+message_search_result_page = "Testing search results page."
+message_single_recipe_page = "Testing single recipe page."
+message_test_page = "Testing test page."
+
 
 def main():
     # Setup driver framework
     driver = webdriver.Firefox()
-
-    # Backtrace messages, pass to tests to provide context
-    message_home_page = "Testing home page."
-    message_search_result_page = "Testing search results page."
-    message_single_recipe_page = "Testing single recipe page."
-    message_test_page = "Testing test page."
 
     # Context variables
     # Local addresses
@@ -28,21 +28,19 @@ def main():
     test_title(driver, message_home_page)
     element_search_bar = test_search_bar_exists(driver, message_home_page)
     element_login_button = test_login_exists(driver, message_home_page)
-    result_card, result_text = test_search_bar_search(driver, element_search_bar, message_home_page)
+    test_search_bar_search(driver, element_search_bar, message_home_page)
 
-
-
-    # print("Testing search result...")
-    # test_site(driver, addr_search_result_page, message_search_result_page)
-    # element_login_button = test_login_exists(driver, message_home_page)
-    #
-    # print("Testing single recipe page...")
-    # test_site(driver, addr_single_recipe_test, message_single_recipe_page)
-    # element_login_button = test_login_exists(driver, message_home_page)
-    #
-    # print("Testing test page...")
-    # test_site(driver, addr_test, message_test_page)
-    # element_login_button = test_login_exists(driver, message_home_page)
+    print("Testing search result...")
+    test_site(driver, addr_search_result_page, message_search_result_page)
+    element_login_button = test_login_exists(driver, message_home_page)
+    
+    print("Testing single recipe page...")
+    test_site(driver, addr_single_recipe_test, message_single_recipe_page)
+    element_login_button = test_login_exists(driver, message_home_page)
+    
+    print("Testing test page...")
+    test_site(driver, addr_test, message_test_page)
+    element_login_button = test_login_exists(driver, message_home_page)
 
     print("Tests Completed")
 
@@ -85,13 +83,30 @@ def test_search_bar_search(driver, search_bar, message):
         time.sleep(5)
 
         # Check elements in results page
+        test_login_exists(driver, message_search_result_page)
         result_card = driver.find_element_by_class_name("recipe-card")
         result_text = driver.find_element_by_class_name("reicpe-text")
 
-        # Return elements
-        return result_card, result_text
+        # Click on the first recipe result
+        driver.find_element_by_class_name("recipe-card").click()
+
+        # Give site time to load results
+        time.sleep(5)
+
+        # Test the contents of the clicked recipe
+        # This is testing the SingleRecipe page
+        result_title = driver.find_element_by_class_name("title-text")
+        result_per_serving = driver.find_element_by_class_name("header-content")
+        result_recipe_step = driver.find_element_by_class_name("instruction-container")
+        result_ingredients = driver.find_element_by_class_name("ingredient-container")
+        result_nutrition_facts = driver.find_element_by_class_name("header-sub-title")
+        result_recipe_image = driver.find_element_by_class_name("recipe-img")
+
+        # Test login page on SingleRecipe page
+        test_login_exists(driver, message_single_recipe_page)
+
     except selEx.NoSuchElementException as e:
-        print("Test Failed: ", message, " Error using search bar.\n", e, "\n")
+        print("Test Failed: ", message, " Error in search process.\n", e, "\n")
 
 
 # Test if the login button is present on the current page
