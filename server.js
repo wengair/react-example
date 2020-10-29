@@ -17,15 +17,15 @@ app.use((req, res, next) => {
   next()
 })
 
-// API
-const endpoints = require('./services/endpoints.js') // file name doesn't affect
-app.use('/api/v1', endpoints)
-
 // deployment
 app.use(express.static(path.join(__dirname, './frontend/build')))
 app.use((req, res) => {
-	res.sendFile(path.join(__dirname, './frontend/build/index.html'))
-});
+  res.sendFile(path.join(__dirname, './frontend/build/index.html'))
+})
+
+// API
+const endpoints = require('./services/endpoints.js') // file name doesn't affect
+app.use('/api/v1', endpoints)
 
 // Setting up server
 const Port = process.env.PORT || 8080

@@ -49,7 +49,6 @@ router.route('/findByIngredients').all(jsonParser).post(async (req, res) => {
   //   logError(500, 'Exception occurs in endpoint while trying to read this client.', err)
   //   return endpointError(res, 500, 'InternalServerError', 'Something went wrong and this client could not be read.')
   // }
-  console.log(recipes)
   return res.send({
     ok: true,
     recipes: recipes,

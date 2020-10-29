@@ -40,6 +40,7 @@ function SearchResult({location}) {
     })
       .then(res => res.json())
       .then(data => setRecipies(data.recipes))
+      .catch(e => console.log(e))
   }
   
   useEffect(() => {
