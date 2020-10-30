@@ -1,5 +1,5 @@
 const express = require('express')
-const path = require("path");
+const path = require("path")
 const app = express()
 const cors = require('cors')
 
@@ -22,11 +22,12 @@ const endpoints = require('./services/endpoints.js') // file name doesn't affect
 app.use('/api/v1', endpoints)
 
 // deployment
-app.use(express.static(path.join(__dirname, './frontend/build')))
-app.use('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './frontend/build/index.html'))
-})
-
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, './frontend/build')))
+  app.use('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './frontend/build/index.html'))
+  })
+}
 
 // Setting up server
 const Port = process.env.PORT || 8080
