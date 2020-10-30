@@ -12,7 +12,7 @@ app.use(cors())
 app.use((req, res, next) => {
   // Enabling CORS
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, HEAD, OPTIONS')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, HEAD, PATCH')
   res.header('Access-Control-Allow-Headers', '*')
   next()
 })
