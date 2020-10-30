@@ -33,6 +33,7 @@ function SearchResult({location}) {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        'accept': 'application/json',
       },
       body: JSON.stringify({
         queryIngredients: queryIngredients,
