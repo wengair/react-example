@@ -29,6 +29,7 @@ function SearchResult({location}) {
   const fetchRecipies = async () => {
     const queryIngredients = queryString.replace(', ', ',').split(',')
     console.log(queryIngredients, 'queryIngredients')
+    console.log(process.env.NODE_ENV,'process.env.NODE_ENV')
     fetch(urlJoin(config.sous.apiUrl, 'findByIngredients'), {
       method: 'POST',
       headers: {
