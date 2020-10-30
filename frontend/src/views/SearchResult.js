@@ -66,7 +66,7 @@ function SearchResult({location}) {
                   <img src={recipe.image} className='recipe-img' alt={recipe.title} />
                   <div className='reicpe-text'>
                     <p className='recipe-name'> {recipe.title} </p>
-                    <img src={LikeIcon} alt='like icon' className='like-icon'/>
+                    <img src={LikeIcon} alt='like icon' className='like-icon' />
                   </div>
                 </div>
               </Link>
