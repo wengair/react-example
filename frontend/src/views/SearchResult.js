@@ -1,22 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import SearchBar from '../components/SearchBar'
 import {config} from '../lib/config'
-import {useHistory} from 'react-router-dom'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import {Link} from 'react-router-dom'
 import LikeIcon from '../images/like.svg'
 
 const urlJoin = require('url-join')
 
-
 function SearchResult({location}) {
   // when redirected form landing page, the user's query will be put in location.state.queryString
-  const history = useHistory()
   const [queryString, setQueryString] = useState(location.state.queryString)
   const [refresh, setRefresh] = useState(false)
   const [recipies, setRecipies] = useState()
-  
-  // import the image from src/images for Carousel to show
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -24,7 +19,6 @@ function SearchResult({location}) {
     // history.push({pathname: `/result`, state: {queryString: queryString}})
     setRefresh(true)
   }
-
 
   const fetchRecipies = async () => {
     const queryIngredients = queryString.replace(', ', ',').split(',')

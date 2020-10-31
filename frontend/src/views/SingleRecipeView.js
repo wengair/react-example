@@ -70,8 +70,8 @@ function SingleRecipeView({match}) {
                   <p className='header-content'>Per Serving:</p>
                   {/* only list the nutritions that we want to show to users */}
                   {recipe.nutrition.nutrients.map(nutruent => {
-                    if(displayedNutrients.includes(nutruent.title)){
-                    return <p key={nutruent.title} className='header-content'>{nutruent.title} {nutruent.amount}{nutruent.unit} {nutruent.percentOfDailyNeeds}% DV</p>
+                    if(displayedNutrients.includes(nutruent.title)) {
+                      return <p key={nutruent.title} className='header-content'>{nutruent.title} {nutruent.amount}{nutruent.unit} {nutruent.percentOfDailyNeeds}% DV</p>
                     }
                   })}
                   <div className='row recipe-misc-container'>
