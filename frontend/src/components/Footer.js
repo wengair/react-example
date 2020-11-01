@@ -3,7 +3,7 @@ import React from 'react'
 function Footer({developer}) {
   return (
     <div className='footer-container'>
-		<p className='footer-text'>OSU - CS561 Project</p>
+		<p className='footer-text' id="test_footer_text">OSU - CS561 Project</p>
 		<style jsx='true'>
         {`
         .footer-container {

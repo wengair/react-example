@@ -52,13 +52,13 @@ function SingleRecipeView({match}) {
         <div className='recipe-container'>
           <div className='row'>
             <div>
-              <img src={recipe.image} alt={recipe.title} className='recipe-img' /><br />
+              <img src={recipe.image} alt={recipe.title} className='recipe-img' id="test_single_recipe_image"/><br />
               <img src={LikeIcon} alt='like icon' />
             </div>
             <div>
               <div className='row'>
-                <img src={TitleIcon} alt='title icon' className='header-icon' />
-                <p className='title-text'>{recipe.title}</p>
+                <img src={TitleIcon} alt='title icon' className='header-icon' id="test_single_recipe_title_icon"/>
+                <p className='title-text' id="test_single_recipe_title">{recipe.title}</p>
               </div>
               {/* title, and other information */}
               <div className='row'>
@@ -71,7 +71,7 @@ function SingleRecipeView({match}) {
                   {/* only list the nutritions that we want to show to users */}
                   {recipe.nutrition.nutrients.map(nutruent => {
                     if(displayedNutrients.includes(nutruent.title)) {
-                      return <p key={nutruent.title} className='header-content'>{nutruent.title} {nutruent.amount}{nutruent.unit} {nutruent.percentOfDailyNeeds}% DV</p>
+                      return <p key={nutruent.title} className='header-content' id="test_single_recipe_nutrients">{nutruent.title} {nutruent.amount}{nutruent.unit} {nutruent.percentOfDailyNeeds}% DV</p>
                     }
                   })}
                   <div className='row recipe-misc-container'>
@@ -80,7 +80,7 @@ function SingleRecipeView({match}) {
                       <img src={CalIcon} alt='calorie icon'/>
                       <div>
                         <p className='header-sub-title'>CALORIES:</p>
-                        <p className='misc-content'>{recipe.nutrition.nutrients[0].amount} calories</p>
+                        <p className='misc-content' id="test_single_recipe_calories">{recipe.nutrition.nutrients[0].amount} calories</p>
                         <p className='misc-content'>per serving</p>
                       </div>
                     </div>
@@ -89,7 +89,7 @@ function SingleRecipeView({match}) {
                       <img src={YieldIcon} alt='yield icon'/>
                       <div>
                         <p className='header-sub-title'>YIELD:</p>
-                        <p className='misc-content'>{recipe.servings} Serving{recipe.servings > 1 ? 's' : ''}</p>
+                        <p className='misc-content' id="test_single_recipe_serving">{recipe.servings} Serving{recipe.servings > 1 ? 's' : ''}</p>
                       </div>
                     </div>
                     {/* timing */}
@@ -97,7 +97,7 @@ function SingleRecipeView({match}) {
                       <img src={TimeIcon} alt='time icon'/>
                       <div>
                         <p className='header-sub-title'>TIMING:</p>
-                        <p className='misc-content'>{recipe.cookingMinutes} mins</p>
+                        <p className='misc-content' id="test_single_recipe_cook_time">{recipe.cookingMinutes} mins</p>
                       </div>
                     </div>
                   </div>
@@ -112,7 +112,7 @@ function SingleRecipeView({match}) {
                 return (
                   <>
                     <p className='body-text'>Step {idx + 1}</p>
-                    <p className='instruction-step body-text'>{instruction.step}</p>
+                    <p className='instruction-step body-text' id="test_single_recipe_instructions">{instruction.step}</p>
                   </>
                 )
               })}
@@ -121,7 +121,7 @@ function SingleRecipeView({match}) {
               <div className='sticky'>
                 <p className='body-title'>Ingredients:</p>
                 {recipe.nutrition.ingredients.map(ingredient => {
-                  return <p key={ingredient.name} className='body-text'>{ingredient.name} {ingredient.amount} {ingredient.unit}</p>
+                  return <p key={ingredient.name} className='body-text' id="test_single_recipe_ingredients">{ingredient.name} {ingredient.amount} {ingredient.unit}</p>
                 })}
               </div>
             </div>
