@@ -2,10 +2,25 @@ const express = require('express')
 const path = require("path");
 const app = express()
 const cors = require('cors')
+const mongoose = require('mongoose')
 
-// const mongoose = require('mongoose')
-// mongoose connection
-// mongoose.connect('mongodb://localhost:27017/hellodb')
+// For inheriting the DB schema models, we should require the schema files in the models folder 
+require("./models/dbSchema.js")
+
+// Once the schema file is loaded we need to instantiate the model using mongoose package like this
+var Data = mongoose.model("data") //check for this "data" variable in /models/dbSchema.js then u can understand
+
+
+//MongoDB configuration 
+const MONGOURI = "mongodb://recipeAdmin:recipe123@ds233571.mlab.com:33571/recipedb"
+
+const connect = mongoose.connect(
+  MONGOURI
+)
+.then((res,err)=>{
+  if(err) console.log(err)
+  console.log("connected to the MongoDB")
+})
 
 // general settings
 app.use(cors())
@@ -28,6 +43,25 @@ if(process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, './frontend/build/index.html'))
   })
 }
+
+
+
+// let us create a collection(i.e like table in sql) in the MongoDB now
+
+//instantiating the model with dummy data
+var dataModel =  new Data({
+  ID : "234",
+  Total_system_power_factor: "34",
+  power_consumed: "23",
+  Time : "22:34",
+ 
+})
+//creating the collection and insert the data
+Data.create(dataModel)
+.then((res,err)=>{
+  if(err) console.log(err)
+  console.log("datas collection created");
+})
 
 // Setting up server
 const Port = process.env.PORT || 8080
