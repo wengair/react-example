@@ -67,11 +67,19 @@ def test_title(driver, message):
         print("Test Failed: ", message, " Title is incorrect.")
 
 
+# Test footer, get footer text.
+def test_footer(driver, message):
+    try:
+        footer_text = driver.find_element_by_id("test_footer_text")
+    except selEx.NoSuchElementException as e:
+        print("Test Failed: ", message, " Footer is not on page.\n", e, "\n")
+
+
 # Test if the search bar is present on the current page
 #   Returns search bar element if it passes
 def test_search_bar_exists(driver, message):
     try:
-        search_bar = driver.find_element_by_class_name("search-bar")
+        search_bar = driver.find_element_by_id("test_search_bar")
         return search_bar
     except selEx.NoSuchElementException as e:
         print("Test Failed: ", message, " Search Bar is not on page.\n", e, "\n")
@@ -90,23 +98,37 @@ def test_search_bar_search(driver, search_bar, message):
 
         # Check elements in results page
         test_login_exists(driver, message_search_result_page)
-        result_card = driver.find_element_by_class_name("recipe-card")
-        result_text = driver.find_element_by_class_name("reicpe-text")
+        test_search_result_searchbar_exists(driver, message_search_result_page)
+
+        result_card = driver.find_element_by_id("test_search_result_recipe_card")
+
+        result_text = driver.find_element_by_id("test_search_result_recipe_title")
+        # print(result_text)
+
+        # Test page navigation (expects 10 results returned)
+        prev_page = driver.find_element_by_id("test_search_result_navbutton_prev")
+        next_page = driver.find_element_by_id("test_search_result_navbutton_next")
+        next_page.click()
+        next_page.click()
+        prev_page.click()
+        prev_page.click()
 
         # Click on the first recipe result
-        driver.find_element_by_class_name("recipe-card").click()
+        driver.find_element_by_id("test_search_result_recipe_card").click()
 
         # Give site time to load results
         time.sleep(5)
 
         # Test the contents of the clicked recipe
         # This is testing the SingleRecipe page
-        result_title = driver.find_element_by_class_name("title-text")
-        result_per_serving = driver.find_element_by_class_name("header-content")
-        result_recipe_step = driver.find_element_by_class_name("instruction-container")
-        result_ingredients = driver.find_element_by_class_name("ingredient-container")
-        result_nutrition_facts = driver.find_element_by_class_name("header-sub-title")
-        result_recipe_image = driver.find_element_by_class_name("recipe-img")
+        result_title = driver.find_element_by_id('test_single_recipe_title')
+        result_per_serving = driver.find_elements_by_id("test_single_recipe_nutrients")
+        result_recipe_step = driver.find_elements_by_id("test_single_recipe_instructions")
+        result_ingredients = driver.find_elements_by_id("test_single_recipe_ingredients")
+        result_nutrition_calories = driver.find_element_by_id("test_single_recipe_calories")
+        result_nutrition_yield = driver.find_element_by_id("test_single_recipe_serving")
+        result_nutrition_timing = driver.find_element_by_id("test_single_recipe_cook_time")
+        result_recipe_image = driver.find_element_by_id("test_single_recipe_image")
 
         # Test login page on SingleRecipe page
         test_login_exists(driver, message_single_recipe_page)
@@ -119,10 +141,18 @@ def test_search_bar_search(driver, search_bar, message):
 #   Return login element if it passes
 def test_login_exists(driver, message):
     try:
-        login_button = driver.find_element_by_class_name("login-btn")
+        login_button = driver.find_element_by_id("test_nav_login_button")
         return login_button
     except selEx.NoSuchElementException as e:
         print("Test Failed: ", message, " Login button is not on page.\n", e, "\n")
+
+
+#
+def test_search_result_searchbar_exists(driver, message):
+    try:
+        searchbar = driver.find_element_by_id("test_search_result_searchbar")
+    except selEx.NoSuchElementException as e:
+        print("Test Failed: ", message, " Local searchbar is not on page.\n", e, "\n")
 
 
 # TODO:
