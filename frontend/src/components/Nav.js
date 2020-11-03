@@ -7,11 +7,11 @@ function Nav() {
     <div className='nav-container'>
       <Link to='/'>
         <div className='logo-container'>
-          <img src={Logo} alt='App Logo' className='logo-img' />
-          <p className='logo-text'>Sous Chef</p>
+          <img src={Logo} alt='App Logo' className='logo-img' id="test_nav_logo_image"/>
+          <p className='logo-text' id="test_nav_logo_text">Sous Chef</p>
         </div>
       </Link>
-      <button className='login-btn'>Log in</button>
+      <button className='login-btn' id="test_nav_login_button">Log in</button>
       <style jsx='true'>
         {`
         .nav-container {

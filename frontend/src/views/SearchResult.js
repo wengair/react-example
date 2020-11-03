@@ -85,7 +85,7 @@ function SearchResult({location}) {
   
   return (
     <div>
-      <div className='searchbar-container'>
+      <div className='searchbar-container' id="test_search_result_searchbar">
         <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
       </div>
       {/* if recipes has value, print all recipes' title */}
@@ -109,8 +109,8 @@ function SearchResult({location}) {
 
       <div className='button-container'>
         <div className='button-wrapper'>
-          <button className='nav-button' id="test_navbutton_prev"onClick={() => changePage(pageNum - 1)}>previous</button>
-          <button className='nav-button' id="test_navbutton_next"onClick={() => changePage(pageNum + 1)}>next</button>
+          <button className='nav-button' id="test_search_result_navbutton_prev" onClick={() => changePage(pageNum - 1)}>previous</button>
+          <button className='nav-button' id="test_search_result_navbutton_next" onClick={() => changePage(pageNum + 1)}>next</button>
         </div>
       </div>
       
