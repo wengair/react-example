@@ -16,10 +16,16 @@ def main():
 
     # Context variables
     # Local addresses
-    addr_home = "http://127.0.0.1:3000"
-    addr_search_result_page = "http://127.0.0.1:3000/SearchResult"
-    addr_single_recipe_test = "http://127.0.0.1:3000/SingleRecipeTest"
-    addr_test = "http://127.0.0.1:3000/test"
+    # addr_home = "http://127.0.0.1:3000"
+    # addr_search_result_page = "http://127.0.0.1:3000/SearchResult"
+    # addr_single_recipe_test = "http://127.0.0.1:3000/SingleRecipeTest"
+    # addr_test = "http://127.0.0.1:3000/test"
+
+    # Live addresses
+    addr_home = "https://sous-chef-recipe.herokuapp.com/"
+    addr_search_result_page = "https://sous-chef-recipe.herokuapp.com/SearchResult"
+    addr_single_recipe_test = "https://sous-chef-recipe.herokuapp.com/SingleRecipeTest"
+    addr_test = "https://sous-chef-recipe.herokuapp.com/test"
 
     # Start Tests
     print("Test Suite Starting")
