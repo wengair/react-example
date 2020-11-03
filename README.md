@@ -51,18 +51,18 @@ The root folder is the backend folder so basically, the frontend folder is put i
 
 # mlab(MONGODB) setup and operations 
 
-Credentials of the mlab account:
-username : NSR
-password : ammananna09
-by using the above crentials login into mlab account and then you can monitor your database collections and many other things.
+Credentials of the mlab account:  
+username : NSR  
+password : ammananna09  
+by using the above crentials login into mlab account and then you can monitor your database collections and many other things.  
 
-the Database user credentials are
-username : recipeAdmin
-password : recipe123
-You can observe these credentials are used in the MONGOURI for the verification purpose while connecting to the DB
-
-THE MLAB and DATABASE USER CREDENTIALS are DIFFERENT please observe that. We Need DTABASE USER CREDS to connect to DB and MLAB creds to monitor our DB in their website.
-
+the Database user credentials are  
+username : recipeAdmin  
+password : recipe123  
+You can observe these credentials are used in the MONGOURI for the verification purpose while connecting to the DB  
+  
+THE MLAB and DATABASE USER CREDENTIALS are DIFFERENT please observe that. We Need DTABASE USER CREDS to connect to DB and MLAB creds to monitor our DB in their website.  
+  
 - Defining the MONGOURI variable in server.js
 - Defining or creating the model files which represent the data schema like the dbSchema.js file in the models folder
 - Creating an object to the model using mongoose package and connecting to mongodb using MONGOURI
