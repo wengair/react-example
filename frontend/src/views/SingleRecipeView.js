@@ -38,9 +38,7 @@ function SingleRecipeView({match}) {
       })
   }
   
-  useEffect(() => {
-    fetchOneRecipe()
-  }, [])
+  useEffect(fetchOneRecipe, [])
 
   return (
     <div>
@@ -73,6 +71,7 @@ function SingleRecipeView({match}) {
                     if(displayedNutrients.includes(nutruent.title)) {
                       return <p key={nutruent.title} className='header-content' id="test_single_recipe_nutrients">{nutruent.title} {nutruent.amount}{nutruent.unit} {nutruent.percentOfDailyNeeds}% DV</p>
                     }
+                    else return null
                   })}
                   <div className='row recipe-misc-container'>
                     {/* calories */}

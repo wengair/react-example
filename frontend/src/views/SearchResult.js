@@ -4,16 +4,15 @@ import {config} from '../lib/config'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import {Link} from 'react-router-dom'
 import LikeIcon from '../images/like.svg'
-import { set } from 'mongoose'
+// import { set } from 'mongoose'
 
 const urlJoin = require('url-join')
 
 function SearchResult({location}) {
   // when redirected form landing page, the user's query will be put in location.state.queryString
   const [queryString, setQueryString] = useState(location.state.queryString)
-  const [refresh, setRefresh] = useState(false)
   const [recipes, setRecipes] = useState() 
-  const [resultPerPage, setResulPerPage] = useState(6) //The number of results to show on a "page"
+  const [resultPerPage] = useState(6) //The number of results to show on a "page"
   const [pageNum, setPageNum] = useState(1) //The current page number, in terms of what group of results are shown
   const [pageRecipes, setPageRecipes] = useState() //Array of recipes shown in quantity of resultPerPage 
   
@@ -22,14 +21,11 @@ function SearchResult({location}) {
     e.preventDefault()
     // when user hit enter, redirect them to /result page with what they typed in the search bar
     // history.push({pathname: `/result`, state: {queryString: queryString}})
-    setRefresh(true)
+    fetchRecipes()
   }
-
 
   const fetchRecipes = async () => {
     const queryIngredients = queryString.replace(', ', ',').split(',')
-    console.log(queryIngredients, 'queryIngredients')
-    console.log(process.env.NODE_ENV,'process.env.NODE_ENV')
     fetch(urlJoin(config.sous.apiUrl, 'findByIngredients'), {
       method: 'POST',
       headers: {
@@ -51,29 +47,22 @@ function SearchResult({location}) {
     }
   }
   
-  useEffect(() => {
-    fetchRecipes()
-    return () => {
-      setRefresh(false)
-    }
-  }, [refresh])
+  useEffect(fetchRecipes, [])
 
   //After recipes or pageNum are changed, get the correct group of recipes to show
-  useEffect(() => {
-    getShowRecipes()
-  }, [recipes, pageNum])
+  useEffect(getShowRecipes, [recipes, pageNum])
 
   //Change the current page 
   const changePage = (nextPage) => {
     //Out of scope check
     //  First page to last page
-    if (nextPage == 0) {
+    if (nextPage === 0) {
       setPageNum(Math.ceil(recipes.length / resultPerPage))
     }
     
     //Out of scope check
     //  Last page to first page
-    else if (nextPage == Math.ceil(recipes.length / resultPerPage) + 1) {
+    else if (nextPage === Math.ceil(recipes.length / resultPerPage) + 1) {
       setPageNum(1)
     }
     
