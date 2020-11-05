@@ -1,8 +1,24 @@
-import React from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import Logo from '../images/chef_logo.png'
-import {Link} from 'react-router-dom';
+import {useLocation, Link} from 'react-router-dom'
+import {UserInfo} from './UserContext'
+import DropdownMenu from './DropdownMenu'
 
 function Nav() {
+  const [showButton, setShowButton] = useState(true)
+  const location = useLocation()
+  const userInfo = useContext(UserInfo)
+  // the content of the dropdown menu, only contains string and function
+  const dropdownMenuContent = [
+    ['Log out', userInfo.userLogOut],
+  ]
+
+  // hide login button if user's in the login page
+  useEffect(() => {
+    if(location.pathname === '/login') setShowButton(false)
+    else setShowButton(true)
+  }, [location])
+
   return (
     <div className='nav-container'>
       <Link to='/'>
@@ -11,7 +27,16 @@ function Nav() {
           <p className='logo-text' id="test_nav_logo_text">Sous Chef</p>
         </div>
       </Link>
-      <button className='login-btn' id="test_nav_login_button">Log in</button>
+      {/* first check the path, hide button if current page is the login page */}
+      {/* then show different button depends on whether user is logged in */}
+      {showButton
+      ? userInfo?.isLoggedIn
+        ? <DropdownMenu button={<div>Hi, {userInfo.info.userName}!</div>} content={dropdownMenuContent} />
+        : <Link to='/login'>
+            <button className='login-btn' id="test_nav_login_button">Log in</button>
+          </Link>
+      : null
+      }
       <style jsx='true'>
         {`
         .nav-container {
