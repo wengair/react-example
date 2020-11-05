@@ -21,18 +21,6 @@ function Landing() {
   }
   
   return (
-<<<<<<< Updated upstream
-    <div className='landing-container'>
-      <div className='carousel-container'>
-        <Carousel showThumbs={false} showStatus={false} showArrows={false} infiniteLoop autoPlay dynamicHeight={false}>
-          {/* generate img tags for Carousel to show */}
-          {imgs.map((imgurl, idx) => <img src={imgurl} alt='background' key={idx} className='slide-img' />)}
-        </Carousel>
-      </div>
-      {/* I turned this search bar into a component since we'll use it twice */}
-      <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
-      <style jsx='true'>
-=======
 	<div className='landing-container'>
 		<div className='search-container'>
 		  <div className='carousel-container'>
@@ -50,7 +38,6 @@ function Landing() {
 			<PopularRecipes />
 		</div>
 	  <style jsx='true'>
->>>>>>> Stashed changes
         {`
         .landing-container {
           width: 100vw;
