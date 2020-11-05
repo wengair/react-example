@@ -1,0 +1,34 @@
+:root {
+  --c-brown: #B68933;
+  --c-light-brown: #D1B756;
+}
+@font-face {
+  font-family:'Signika SC';
+  src:url('./fonts/Signika-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family:'Shanti';
+  src:url('./fonts/Shanti-Regular.ttf') format('truetype');
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a {
+  text-decoration: none;
+}
+
+.row {
+  display: flex;
+}
