@@ -46,11 +46,15 @@ function SearchResult({location}) {
       setPageRecipes(recipes.slice((pageNum - 1) * resultPerPage, (pageNum - 1) * resultPerPage + resultPerPage))
     }
   }
-  
-  useEffect(fetchRecipes, [])
+
+  useEffect(() => {
+    fetchRecipes()
+  }, [])
 
   //After recipes or pageNum are changed, get the correct group of recipes to show
-  useEffect(getShowRecipes, [recipes, pageNum])
+  useEffect(() => {
+    getShowRecipes()
+  }, [recipes, pageNum])
 
   //Change the current page 
   const changePage = (nextPage) => {
