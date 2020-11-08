@@ -28,7 +28,7 @@ function Landing() {
         <div className='carousel-container'>
           <Carousel showThumbs={false} showStatus={false} showArrows={false} infiniteLoop autoPlay dynamicHeight={false}>
 			      {/* generate img tags for Carousel to show */}
-			      {imgs.map((imgurl, idx) => <img src={imgurl} alt='background' key={idx} className='slide-img' />)}
+			      {imgs.map((imgurl, idx) => <img src={imgurl} alt='background' id="test_landing_carousel_images" key={idx} className='slide-img' />)}
 			    </Carousel>
 		    </div>
 		    {/* I turned this search bar into a component since we'll use it twice */}
