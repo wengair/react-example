@@ -2,6 +2,8 @@ import React, {useState, useContext} from 'react'
 import {useHistory} from 'react-router-dom'
 import AccountForm from '../components/AccountForm'
 import {UserInfo} from '../components/UserContext'
+import {config} from '../lib/config'
+const urlJoin = require('url-join')
 
 function LoginAndRegister() {
   const history = useHistory()
@@ -12,7 +14,7 @@ function LoginAndRegister() {
   // register
   const [registerEmail, setRegisterEmail] = useState()
   const [registerpassword, setRegisterPassword] = useState()
-  const [registerParamErrors] = useState()
+  const [registerParamErrors, setRegisterParamErrors] = useState()
   // get the user's information from context
   const userInfo = useContext(UserInfo)
 
@@ -21,9 +23,34 @@ function LoginAndRegister() {
     history.push('/')
   }
   
-  const onRegisterSubmit = () => {
-    userInfo.userLogIn(registerEmail)
-    history.push('/')
+  const onRegisterSubmit = (e) => {
+    e.preventDefault()
+    fetch(urlJoin(config.sous.apiUrl, 'users', 'register'), {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+      },
+      body: JSON.stringify({
+        userInfo: {
+          email: registerEmail,
+	        password:registerpassword,
+        },
+      }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        if(result.ok) {
+          // set user info to localstorage
+          userInfo.userLogIn(registerEmail)
+          history.push('/')
+        }
+        else {
+          window.scrollTo(0, 0)
+          setRegisterParamErrors(result.paramErrors)
+        }
+      })
+      .catch(e => console.log(e))
   }
 
   return (
