@@ -13,16 +13,36 @@ function AccountForm({onSubmit, paramErrors, buttonText, email, setEmail, passwo
   }
 
   return (
+    <div class = "container">
     <form onSubmit={onSubmit}>
       {/* FormField is only for error message displaying, don't need to style it now */}
       <FormField errorMsg={paramErrors}>
-        <input type="text" placeholder='Email' value={email} onChange={handleEmailChange} />
+        <p><input type="text" placeholder='Email' id="test_account_form_email_input" value={email} onChange={handleEmailChange} /></p>
       </FormField>
       <FormField errorMsg={paramErrors}>
-        <input type="text" placeholder='Password' value={password} onChange={handlePassChange} />
+        <p><input type="text" placeholder='Password' id="test_account_form_password_input" value={password} onChange={handlePassChange} /></p>
       </FormField>
       <button type='submit' className='form-confirm-btn' id={buttonId}>{buttonText}</button>
     </form>
+    
+    		<style jsx='true'>
+        {`
+        
+        .form-confirm-btn{
+          width: 99px;
+          background: #FDFDFD;
+          border: 2px solid #B68933;
+          box-sizing: border-box;;
+        }
+        
+        .container{
+          
+        }
+        
+        
+        `}
+      </style>
+          </div>
   )
 }
 

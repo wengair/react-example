@@ -28,8 +28,9 @@ function LoginAndRegister() {
 
   return (
     <div className='container'>
+    <div className='result-wrapper'>
       <div className='form-container'>
-        <div>
+        <div class = "login">
           <p>Welcome Back!</p>
           <p>Sign In</p>
           {/* since the form part is repeated, I put them into another component */}
@@ -43,7 +44,9 @@ function LoginAndRegister() {
             setPassword={setLoginPassword}
           />
         </div>
-        <div>
+        <div class = "vertical-col">
+        </div>
+        <div class = "account">
           <p>New to Sous Chef?</p>
           <p>Create New Account</p>
           <AccountForm 
@@ -57,14 +60,48 @@ function LoginAndRegister() {
           />
         </div>
       </div>
+      </div>
       <style jsx='true'>
         {`
         .container {
           height: calc(100vh - 190px);
+          text-align:center;
         }
+        
+		    .login {
+		      text-align:left;
+		      float: left;
+		      width: 50%;
+		      top: 900px;
+		    }	
+		    .account {
+		      text-align:left;
+		      float: right;
+		      width: 50%;
+		    }
+		    
+		    .vertical-col {
+          height: 40%;
+          width: 1px;
+          background: black;
+          position: absolute;
+          left: 46%;
+          } 
+        
+        .result-wrapper {
+            display:inline-block;
+		        width: 921px;
+            height: 409px;
+            left: 151px;
+            top: 400px;
+            background: rgba(252, 209, 127, 0.65);
+            display: center;
+      }
 
         .form-container {
-          display: flex;
+          margin: 100px;
+          height: 300px;
+          text-align:center;
         }
         `}
       </style>
