@@ -15,10 +15,10 @@ function AccountForm({onSubmit, paramErrors, buttonText, email, setEmail, passwo
   return (
     <form onSubmit={onSubmit}>
       {/* FormField is only for error message displaying, don't need to style it now */}
-      <FormField errorMsg={paramErrors}>
+      <FormField errorMsg={paramErrors?.email?.message}>
         <input type="text" placeholder='Email' id="test_account_form_email_input" value={email} onChange={handleEmailChange} />
       </FormField>
-      <FormField errorMsg={paramErrors}>
+      <FormField errorMsg={paramErrors?.password?.message}>
         <input type="text" placeholder='Password' id="test_account_form_password_input" value={password} onChange={handlePassChange} />
       </FormField>
       <button type='submit' className='form-confirm-btn' id="test_account_form_submit_button"> {buttonText} </button>
