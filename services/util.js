@@ -17,6 +17,7 @@ const endpointError = (res, statusCode, code, message) => {
     ],
   })
 }
+
 const standardErrorResponse = (res, err) => {
   switch(err.code) {
     case 401:
@@ -48,4 +49,23 @@ const standardErrorResponse = (res, err) => {
       })
   }
 }
-module.exports = {logError, endpointError, standardErrorResponse}
+
+const generateParamErroes = (validationResult) => {
+  const pareamErrors = {}
+  // filter the unnecessary error message
+  Object.entries(validationResult.errors).forEach(errMsg => {
+    pareamErrors[errMsg[0]] = { 'message': errMsg[1].properties.message}
+  })
+
+  return ({
+    errors: [
+      {
+        code: 'BadRequest',
+        message: 'There were some problems with the values you provided. Please see errors below.',
+      },
+    ],
+    paramErrors: pareamErrors,
+  })
+}
+
+module.exports = {logError, endpointError, standardErrorResponse, generateParamErroes}
