@@ -34,7 +34,7 @@ function LoginAndRegister() {
       body: JSON.stringify({
         userInfo: {
           email: loginEmail,
-	  password: loginpassword,
+          password: loginpassword,
         },
       }),
     })
@@ -64,7 +64,7 @@ function LoginAndRegister() {
       body: JSON.stringify({
         userInfo: {
           email: registerEmail,
-	  password: registerpassword,
+          password: registerpassword,
         },
       }),
     })
