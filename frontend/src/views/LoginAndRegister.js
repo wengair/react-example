@@ -29,7 +29,7 @@ function LoginAndRegister() {
   return (
     <div className='container'>
       <div className='form-container'>
-        <div>
+        <div id="test_login_sign_in_container">
           <p>Welcome Back!</p>
           <p>Sign In</p>
           {/* since the form part is repeated, I put them into another component */}
@@ -43,7 +43,7 @@ function LoginAndRegister() {
             setPassword={setLoginPassword}
           />
         </div>
-        <div>
+        <div id="test_login_create_account_container">
           <p>New to Sous Chef?</p>
           <p>Create New Account</p>
           <AccountForm 

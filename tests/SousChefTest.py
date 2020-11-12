@@ -9,6 +9,7 @@ message_search_result_page = "Testing search results page."
 message_single_recipe_page = "Testing single recipe page."
 message_test_page = "Testing test page."
 message_profile_page = "Testing profile page."
+message_login_page = "Testing login page."
 
 
 def main():
@@ -17,17 +18,20 @@ def main():
 
     # Context variables
     # Local addresses
-    # addr_home = "http://127.0.0.1:3000"
-    # addr_search_result_page = "http://127.0.0.1:3000/SearchResult"
-    # addr_single_recipe_test = "http://127.0.0.1:3000/SingleRecipeTest"
-    # addr_test = "http://127.0.0.1:3000/test"
+    addr_home = "http://127.0.0.1:3000"
+    addr_search_result_page = "http://127.0.0.1:3000/SearchResult"
+    addr_single_recipe_test = "http://127.0.0.1:3000/SingleRecipeTest"
+    addr_test = "http://127.0.0.1:3000/test"
+    addr_profile = "http://127.0.0.1:3000/profile"
+    addr_login = "http://127.0.0.1:3000/login"
 
     # Live addresses
-    addr_home = "https://sous-chef-recipe.herokuapp.com/"
-    addr_search_result_page = "https://sous-chef-recipe.herokuapp.com/SearchResult"
-    addr_single_recipe_test = "https://sous-chef-recipe.herokuapp.com/SingleRecipeTest"
-    addr_test = "https://sous-chef-recipe.herokuapp.com/test"
-    addr_profile = "https://sous-chef-recipe.herokuapp.com/profile"
+    # addr_home = "https://sous-chef-recipe.herokuapp.com/"
+    # addr_search_result_page = "https://sous-chef-recipe.herokuapp.com/SearchResult"
+    # addr_single_recipe_test = "https://sous-chef-recipe.herokuapp.com/SingleRecipeTest"
+    # addr_test = "https://sous-chef-recipe.herokuapp.com/test"
+    # addr_profile = "https://sous-chef-recipe.herokuapp.com/profile"
+    # addr_login = "https://sous-chef-recipe.herokuapp.com/login"
 
     # Start Tests
     print("Test Suite Starting")
@@ -49,6 +53,10 @@ def main():
     print("Testing test page...")
     test_site(driver, addr_test, message_test_page)
     element_login_button = test_login_exists(driver, message_home_page)
+
+    print("Testing login page...")
+    test_site(driver, addr_login, message_login_page)
+    test_login_page(driver, message_login_page)
 
     print("Testing profile page...")
     test_site(driver, addr_profile, message_profile_page)
@@ -85,7 +93,7 @@ def test_footer(driver, message):
 #   Returns search bar element if it passes
 def test_search_bar_exists(driver, message):
     try:
-        search_bar = driver.find_element_by_id("test_search_bar")
+        search_bar = driver.find_element_by_id("test_search_bar_input")
         return search_bar
     except selEx.NoSuchElementException as e:
         print("Test Failed: ", message, " Search Bar is not on page.\n", e, "\n")
@@ -153,7 +161,7 @@ def test_login_exists(driver, message):
         print("Test Failed: ", message, " Login button is not on page.\n", e, "\n")
 
 
-#
+# TODO: description
 def test_search_result_searchbar_exists(driver, message):
     try:
         searchbar = driver.find_element_by_id("test_search_result_searchbar")
@@ -161,6 +169,7 @@ def test_search_result_searchbar_exists(driver, message):
         print("Test Failed: ", message, " Local searchbar is not on page.\n", e, "\n")
 
 
+# TODO: description
 def test_profile_page(driver, message):
     try:
         personal_button = driver.find_element_by_id("test_profile_page_personal_button")
@@ -178,8 +187,23 @@ def test_profile_page(driver, message):
     except selEx.NoSuchElementException as e:
         print("Test Failed: ", message, " Profile Page encountered error.\n", e, "\n")
 
+
+# Test the login page
+#   Get key elements of page, prep for login
+def test_login_page(driver, message):
+    try:
+        sign_in_container = driver.find_element_by_id("test_login_sign_in_container")
+        login_container = driver.find_element_by_id("test_login_create_account_container")
+        email_input = driver.find_element_by_id("test_account_form_email_input")
+        password_input = driver.find_element_by_id("test_account_form_password_input")
+        submit_button = driver.find_element_by_id("test_account_form_submit_button")
+    except selEx.NoSuchElementException as e:
+        print("Test Failed: ", message, " Profile Page encountered error.\n", e, "\n")
+
 # TODO:
     # static expansion
+    #
+
 
 if __name__ == "__main__":
     main()
