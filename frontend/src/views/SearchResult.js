@@ -79,9 +79,11 @@ function SearchResult({location}) {
       </div>
       {/* if recipes has value, print all recipes' title */}
       {/* we need "recipes &&" to not show anything since recipes will recieve data later (in useEffect) */}
+      
       <div className='result-wrapper'>
         {pageRecipes && pageRecipes.map(recipe => {
           return (
+           <div className='form-recipe'>
             <div className='recipe-card' id="test_search_result_recipe_card">
               <Link to={`/recipe/${recipe.id}`}>
                 <div>
@@ -92,10 +94,13 @@ function SearchResult({location}) {
                   </div>
                 </div>
               </Link>
-            </div>)
+            </div>
+          </div>
+            )
+            
         })}
       </div>
-
+    
       <div className='button-container'>
         <div className='button-wrapper'>
           <button className='nav-button' id="test_search_result_navbutton_prev" onClick={() => changePage(pageNum - 1)}>previous</button>
@@ -111,13 +116,12 @@ function SearchResult({location}) {
         padding-top: 30px;
         padding-bottom: 45px;
       }
-
+      
       .result-wrapper {
         background: rgba(252, 209, 127, 0.26);
         display: grid;
-        grid-template-columns:
-                1fr 1fr 1fr;
-        padding: 50px 50px 25px 50px;
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 50px 65px 25px 65px;
         min-height: calc(100vh - 400px);
       }
 
@@ -144,9 +148,10 @@ function SearchResult({location}) {
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
+        cursor: pointer;
         margin: 0px 180px;
         transition-duration: 0.4s;
-        cursor: pointer;
+        front-family: Sedan
       }
 
       .nav-button:hover {
@@ -159,21 +164,28 @@ function SearchResult({location}) {
         padding: 50px;
         align: center;
       }
-
+     .form-recipe{
+        max-width:100%;
+        //disply:flex;
+        justify-content: center;
+      }
       .recipe-card {
-        padding: 10px;
-        object-fit: cover;
+        padding: 15px;
+        
+        //object-fit: cover;
         background-color: white;
-        height: 250px;
-        width: 240px;
-        align: center;
+        max-height: 250px;
+        max-width: 240px;
+        justify-content:center;
         border-radius: 15px;
         margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
 
       }
 
       .recipe-img {
-        width: 100%;
+        max-width: 100%;
         align: center;
         border-radius: 10px;
       }
@@ -185,6 +197,9 @@ function SearchResult({location}) {
 
       .recipe-name {
         margin: 0px;
+        font-family: Sedan;
+        color: rgba(108, 108, 108, 1);
+        font-size: 15px;
       }
 
       .like-icon {
