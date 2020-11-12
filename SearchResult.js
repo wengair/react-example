@@ -45,13 +45,9 @@ function SearchResult({location}) {
     }
   }
 
-<<<<<<< HEAD
-  useEffect(fetchRecipes, [])
-=======
   useEffect(() => {
     fetchRecipes()
   }, [])
->>>>>>> 8be9f4ae67476c6aeaef3a8064d47126a774931f
 
   //After recipes or pageNum are changed, get the correct group of recipes to show
   useEffect(() => {
