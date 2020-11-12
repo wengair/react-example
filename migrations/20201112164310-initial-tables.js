@@ -14,21 +14,25 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function(db, callback) {
+exports.up = function(db) {
   console.log('Building tables...')
-  db.createTable('users', {
-    id: { 
-      type: 'int',
-      primaryKey: true,
-      autoIncrement: true
-    },
-    email: 'string',
-    password: 'string',
-    first_name: 'string',
-    last_name: 'string',
-    Created: 'date',
-    Modified: 'date',
-  }, callback);
+  const engineCharsetCollate = 'ENGINE=InnoDB CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
+
+  const createUsers = () => db.runSql(`
+    CREATE TABLE users (
+      id                  INT NOT NULL AUTO_INCREMENT,   -- a uuid
+      email               VARCHAR(255) NOT NULL,
+      password            VARCHAR(255) NOT NULL,
+      first_name          VARCHAR(255),
+      last_name           VARCHAR(255),
+      created             DATETIME NOT NULL,
+      modified            DATETIME,
+      PRIMARY KEY (id)
+    ) ${engineCharsetCollate}
+  `)
+
+  return  createUsers()
+  .then(console.log('Build users table successfully'))
 };
 
 exports.down = function(db) {
