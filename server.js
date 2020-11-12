@@ -23,7 +23,6 @@ mongoose.connect(
 
 
 const { Client } = require('pg');
-console.log('config.postgreUrl', config.postgreUrl)
 const client = new Client({
   connectionString: config.postgreUrl,
   ssl: {
@@ -33,7 +32,10 @@ const client = new Client({
 
 client.connect();
 
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+client.query(`
+INSERT INTO users (name)
+VALUES ('test user');`
+, (err, res) => {
   if (err) throw err;
   for (let row of res.rows) {
     console.log(JSON.stringify(row));

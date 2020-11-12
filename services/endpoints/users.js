@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const {endpointError, logError, generateParamErroes} = require('../util')
+const config = require('../config')
 
 // Body Parser Middleware
 const bodyParser = require('body-parser')
@@ -12,6 +13,16 @@ const mongoose = require('mongoose')
 require('../../models/users')
 // Once the schema file is loaded we need to instantiate the model using mongoose package like this
 const Users = mongoose.model('users') //check for this 'data' variable in /models/dbSchema.js then u can understand
+
+const { Client } = require('pg');
+const client = new Client({
+  connectionString: config.postgreUrl,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+client.connect();
 
 router.route('/login').all(jsonParser).post(async (req, res) => {
   const userInfo = req.body.userInfo
@@ -54,6 +65,24 @@ router.route('/register').all(jsonParser).post(async (req, res) => {
   try {
     await Users.create(newUserInfo)
     return res.send({ok: true})
+  }
+  catch(err) {
+    // duplicated email error
+    if(err.errors) return res.status(400).json(generateParamErroes(err))
+    // unexpected errors
+    logError(500, 'Exception occurs in endpoint while searching for user info by email and password', err)
+    return endpointError(res, 500, 'InternalServerError', 'Something went wrong and the user info could not be found by email and password.')
+  }
+})
+
+router.route('/test').all(jsonParser).post(async (req, res) => {
+  const userInfo = req.body.userInfo
+  try {
+    const result = await client.query(`SELECT * FROM users`)
+    return res.send({
+      ok: true,
+      result: result.rows,
+    })
   }
   catch(err) {
     // duplicated email error

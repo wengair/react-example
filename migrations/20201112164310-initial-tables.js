@@ -16,18 +16,56 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db, callback) {
   console.log('Building tables...')
+  console.log('Building users table...')
   db.createTable('users', {
-    id: { type: 'int', primaryKey: true, autoIncrement: true },
-    name: 'string'  // shorthand notation
+    id: {
+      type: 'int',
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    email: {
+      type: 'string',
+      notNull: true,
+      unique: true,
+    },
+    password: {
+      type: 'string',
+      notNull: true,
+      unique: true,
+    },
+    first_name: 'string',
+    last_name: 'string',
+    created_at: {
+      type: 'date',
+      notNull: true,
+    },
+    modified_at: 'date',
   }, callback);
-  db.createTable('pets', {
-    id: { type: 'int', primaryKey: true, autoIncrement: true },
-    name: 'string'  // shorthand notation
+
+  console.log('Building ingredients table...')
+  db.createTable('ingredients', {
+    id: {
+      type: 'int',
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: {
+      type: 'string',
+      notNull: true,
+    },
+    aisle: 'string',
+    consitency: 'string',
+    unit: 'string',
+    score: 'int',
+    created_at: {
+      type: 'date',
+      notNull: true,
+    },
   }, callback);
 };
 
 exports.down = function(db, callback) {
-  db.dropTable('pets', callback);
+  db.dropTable('ingredients', callback);
   db.dropTable('users', callback);
 };
 
