@@ -16,7 +16,7 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db, callback) {
   console.log('Building tables...')
-  console.log('Building users table...')
+  
   db.createTable('users', {
     id: {
       type: 'int',
@@ -41,8 +41,8 @@ exports.up = function(db, callback) {
     },
     modified_at: 'date',
   }, callback);
+  console.log('users table built successfully')
 
-  console.log('Building ingredients table...')
   db.createTable('ingredients', {
     id: {
       type: 'int',
@@ -62,10 +62,50 @@ exports.up = function(db, callback) {
       notNull: true,
     },
   }, callback);
+  console.log('ingredients table built successfully')
+
+  db.createTable('recipes', {
+    id: {
+      type: 'int',
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: {
+      type: 'string',
+      notNull: true,
+    },
+    // misc
+    servings: 'int',
+    readyInMinutes: 'int',
+    sourceName: 'string',
+    sourceUrl: 'string',
+    spoonacularSourceUrl: 'string',
+    healthScore: 'int',
+    spoonacularScore: 'int',
+    pricePerServing: 'int',
+    // category
+    cheap: 'boolean',
+    dairyFree: 'boolean',
+    glutenFree: 'boolean',
+    ketogenic: 'boolean',
+    lowFodmap: 'boolean',
+    sustainable: 'boolean',
+    vegan: 'boolean',
+    vegetarian: 'boolean',
+    veryHealthy: 'boolean',
+    whole30: 'boolean',
+    created_at: {
+      type: 'date',
+      notNull: true,
+    },
+  }, callback);
+  console.log('recipes table built successfully')
 };
 
 exports.down = function(db, callback) {
+
   db.dropTable('ingredients', callback);
+  db.dropTable('recipes', callback);
   db.dropTable('users', callback);
 };
 
