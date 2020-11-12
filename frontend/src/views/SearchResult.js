@@ -159,22 +159,21 @@ function SearchResult({location}) {
       .nav-button:hover {
         background-color: var(--c-brown);
         color: white;
-
       }
 
       .container-fluid{
         padding: 50px;
         align: center;
       }
-     .form-recipe{
+
+     .form-recipe {
         max-width:100%;
         //disply:flex;
         justify-content: center;
       }
+
       .recipe-card {
         padding: 15px;
-        
-        //object-fit: cover;
         background-color: white;
         max-height: 250px;
         max-width: 240px;
@@ -183,7 +182,6 @@ function SearchResult({location}) {
         margin-bottom: 20px;
         margin-left: auto;
         margin-right: auto;
-
       }
 
       .recipe-img {
