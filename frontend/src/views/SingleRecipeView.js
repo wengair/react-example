@@ -37,7 +37,7 @@ function SingleRecipeView({match}) {
         }
       })
   }
-  
+
   useEffect(fetchOneRecipe, [])
 
   return (

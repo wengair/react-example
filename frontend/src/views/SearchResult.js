@@ -11,11 +11,11 @@ const urlJoin = require('url-join')
 function SearchResult({location}) {
   // when redirected form landing page, the user's query will be put in location.state.queryString
   const [queryString, setQueryString] = useState(location.state.queryString)
-  const [recipes, setRecipes] = useState() 
+  const [recipes, setRecipes] = useState()
   const [resultPerPage] = useState(6) //The number of results to show on a "page"
   const [pageNum, setPageNum] = useState(1) //The current page number, in terms of what group of results are shown
-  const [pageRecipes, setPageRecipes] = useState() //Array of recipes shown in quantity of resultPerPage 
-  
+  const [pageRecipes, setPageRecipes] = useState() //Array of recipes shown in quantity of resultPerPage
+
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -46,32 +46,32 @@ function SearchResult({location}) {
       setPageRecipes(recipes.slice((pageNum - 1) * resultPerPage, (pageNum - 1) * resultPerPage + resultPerPage))
     }
   }
-  
+
   useEffect(fetchRecipes, [])
 
   //After recipes or pageNum are changed, get the correct group of recipes to show
   useEffect(getShowRecipes, [recipes, pageNum])
 
-  //Change the current page 
+  //Change the current page
   const changePage = (nextPage) => {
     //Out of scope check
     //  First page to last page
     if (nextPage === 0) {
       setPageNum(Math.ceil(recipes.length / resultPerPage))
     }
-    
+
     //Out of scope check
     //  Last page to first page
     else if (nextPage === Math.ceil(recipes.length / resultPerPage) + 1) {
       setPageNum(1)
     }
-    
+
     //Go to the page requested
     else {
-      setPageNum(nextPage) 
+      setPageNum(nextPage)
     }
   }
-  
+
   return (
     <div>
       <div className='searchbar-container' id="test_search_result_searchbar">
@@ -102,7 +102,7 @@ function SearchResult({location}) {
           <button className='nav-button' id="test_search_result_navbutton_next" onClick={() => changePage(pageNum + 1)}>next</button>
         </div>
       </div>
-      
+
       <style jsx='true'>
       {`
       .searchbar-container {
@@ -115,7 +115,7 @@ function SearchResult({location}) {
       .result-wrapper {
         background: rgba(252, 209, 127, 0.26);
         display: grid;
-        grid-template-columns: 
+        grid-template-columns:
                 1fr 1fr 1fr;
         padding: 50px 50px 25px 50px;
         min-height: calc(100vh - 400px);
@@ -131,7 +131,7 @@ function SearchResult({location}) {
         justify-content: center;
         align-items: center;
       }
-      
+
       .nav-button {
         background-color: white;
         border: 2px solid #e7e7e7;
@@ -153,7 +153,7 @@ function SearchResult({location}) {
         background-color: var(--c-brown);
         color: white;
       }
-    
+
       .container-fluid{
         padding: 50px;
         align: center;
@@ -162,13 +162,21 @@ function SearchResult({location}) {
       .recipe-card {
         padding: 10px;
         object-fit: cover;
+        background-color: white;
+        height: 250px;
+        width: 240px;
+        align: center;
+        border-radius: 15px;
+        margin-bottom: 20px;
+
       }
 
       .recipe-img {
         width: 100%;
-        
+        align: center;
+        border-radius: 10px;
       }
-      
+
       .reicpe-text {
         display: flex;
         justify-content: space-between;

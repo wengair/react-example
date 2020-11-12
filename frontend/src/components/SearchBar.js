@@ -25,15 +25,30 @@ function SearchBar({onSubmit, queryString, setQueryString}) {
           border: 4px solid #D2AE69;
           filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
         }
-        
+
         .searchbutton {
           z-index: 1;
           position: relative;
-          top: -5px;
-          left: -70px;
+          top: -1px;
+          left: -268px;
           font-family: 'Font Awesome 5 Free';
+          background-color: rgba(243, 220, 159, 0.8);
+          border: 2px solid #e7e7e7;
+          border-radius: 20px;
+          border: none;
+          color: black;
+          height: 30px;
+          width: 75px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 0px 180px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+
         }
-        
+
         `}
       </style>
     </form>
