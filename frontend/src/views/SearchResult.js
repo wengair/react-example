@@ -4,8 +4,6 @@ import {config} from '../lib/config'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import {Link} from 'react-router-dom'
 import LikeIcon from '../images/like.svg'
-// import { set } from 'mongoose'
-
 const urlJoin = require('url-join')
 
 function SearchResult({location}) {
@@ -47,10 +45,14 @@ function SearchResult({location}) {
     }
   }
 
-  useEffect(fetchRecipes, [])
+  useEffect(() => {
+    fetchRecipes()
+  }, [])
 
   //After recipes or pageNum are changed, get the correct group of recipes to show
-  useEffect(getShowRecipes, [recipes, pageNum])
+  useEffect(() => {
+    getShowRecipes()
+  }, [recipes, pageNum])
 
   //Change the current page
   const changePage = (nextPage) => {

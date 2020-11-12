@@ -8,6 +8,7 @@ message_home_page = "Testing home page."
 message_search_result_page = "Testing search results page."
 message_single_recipe_page = "Testing single recipe page."
 message_test_page = "Testing test page."
+message_profile_page = "Testing profile page."
 
 
 def main():
@@ -26,6 +27,7 @@ def main():
     addr_search_result_page = "https://sous-chef-recipe.herokuapp.com/SearchResult"
     addr_single_recipe_test = "https://sous-chef-recipe.herokuapp.com/SingleRecipeTest"
     addr_test = "https://sous-chef-recipe.herokuapp.com/test"
+    addr_profile = "https://sous-chef-recipe.herokuapp.com/profile"
 
     # Start Tests
     print("Test Suite Starting")
@@ -47,6 +49,10 @@ def main():
     print("Testing test page...")
     test_site(driver, addr_test, message_test_page)
     element_login_button = test_login_exists(driver, message_home_page)
+
+    print("Testing profile page...")
+    test_site(driver, addr_profile, message_profile_page)
+    test_profile_page(driver, message_profile_page)
 
     print("Tests Completed")
 
@@ -155,7 +161,25 @@ def test_search_result_searchbar_exists(driver, message):
         print("Test Failed: ", message, " Local searchbar is not on page.\n", e, "\n")
 
 
+def test_profile_page(driver, message):
+    try:
+        personal_button = driver.find_element_by_id("test_profile_page_personal_button")
+        favorite_button = driver.find_element_by_id("test_profile_page_favorite_button")
+        allergen_button = driver.find_element_by_id("test_profile_page_allergen_button")
+
+        user_image = driver.find_element_by_id("test_profile_page_user_image")
+
+        email_input = driver.find_element_by_id("test_profile_page_email_input")
+        first_name_input = driver.find_element_by_id("test_profile_page_first_name_input")
+        last_name_input = driver.find_element_by_id("test_profile_page_last_name_input")
+        password_input = driver.find_element_by_id("test_profile_page_password_input")
+
+        setup_button = driver.find_element_by_id("test_profile_page_setup_button")
+    except selEx.NoSuchElementException as e:
+        print("Test Failed: ", message, " Profile Page encountered error.\n", e, "\n")
+
 # TODO:
+    # static expansion
 
 if __name__ == "__main__":
     main()
