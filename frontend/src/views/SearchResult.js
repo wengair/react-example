@@ -152,6 +152,7 @@ function SearchResult({location}) {
       .nav-button:hover {
         background-color: var(--c-brown);
         color: white;
+
       }
 
       .container-fluid{

@@ -8,8 +8,8 @@ function SearchBar({onSubmit, queryString, setQueryString}) {
 
   return (
     <form onSubmit={onSubmit}>
-      <input onChange={handleTextChange} type='text' className='search-bar' placeholder='&#xf002;  Enter ingredients here...' defaultValue={queryString}/>
-      <button type='submit' className='searchbutton'>
+      <input onChange={handleTextChange} type='text' id="test_search_bar_input" className='search-bar' placeholder='&#xf002;  Enter ingredients here...' defaultValue={queryString}/>
+      <button type='submit' id="test_search_bar_submit_button" className='searchbutton'>
         &#xf002;
       </button>
       <style jsx='true'>

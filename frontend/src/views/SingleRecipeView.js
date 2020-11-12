@@ -38,7 +38,13 @@ function SingleRecipeView({match}) {
       })
   }
 
+<<<<<<< HEAD
   useEffect(fetchOneRecipe, [])
+=======
+  useEffect(() => {
+    fetchOneRecipe()
+  }, [])
+>>>>>>> 8be9f4ae67476c6aeaef3a8064d47126a774931f
 
   return (
     <div>
