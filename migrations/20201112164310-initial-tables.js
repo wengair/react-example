@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
-var dbm;
-var type;
-var seed;
+var dbm
+var type
+var seed
 
 /**
   * We receive the dbmigrate dependency from dbmigrate initially.
   * This enables us to not have to rely on NODE_PATH.
   */
 exports.setup = function(options, seedLink) {
-  dbm = options.dbmigrate;
-  type = dbm.dataType;
-  seed = seedLink;
-};
+  dbm = options.dbmigrate
+  type = dbm.dataType
+  seed = seedLink
+}
 
 exports.up = function(db, callback) {
   console.log('Building tables...')
@@ -40,14 +40,14 @@ exports.up = function(db, callback) {
       notNull: true,
     },
     modified_at: 'date',
-  }, callback);
+  }, callback)
   console.log('users table built successfully')
 
   db.createTable('ingredients', {
     id: {
       type: 'int',
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     name: {
       type: 'string',
@@ -61,14 +61,14 @@ exports.up = function(db, callback) {
       type: 'date',
       notNull: true,
     },
-  }, callback);
+  }, callback)
   console.log('ingredients table built successfully')
 
   db.createTable('recipes', {
     id: {
       type: 'int',
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     name: {
       type: 'string',
@@ -98,17 +98,17 @@ exports.up = function(db, callback) {
       type: 'date',
       notNull: true,
     },
-  }, callback);
+  }, callback)
   console.log('recipes table built successfully')
-};
+}
 
 exports.down = function(db, callback) {
 
-  db.dropTable('ingredients', callback);
-  db.dropTable('recipes', callback);
-  db.dropTable('users', callback);
-};
+  db.dropTable('ingredients', callback)
+  db.dropTable('recipes', callback)
+  db.dropTable('users', callback)
+}
 
 exports._meta = {
   "version": 1
-};
+}
