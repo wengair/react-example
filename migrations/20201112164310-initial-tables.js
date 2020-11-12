@@ -14,21 +14,21 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function(db) {
+exports.up = function(db, callback) {
   console.log('Building tables...')
   db.createTable('users', {
     id: { type: 'int', primaryKey: true, autoIncrement: true },
     name: 'string'  // shorthand notation
-  });
+  }, callback);
   db.createTable('pets', {
     id: { type: 'int', primaryKey: true, autoIncrement: true },
     name: 'string'  // shorthand notation
-  });
+  }, callback);
 };
 
-exports.down = function(db) {
-  db.dropTable('pets');
-  db.dropTable('users');
+exports.down = function(db, callback) {
+  db.dropTable('pets', callback);
+  db.dropTable('users', callback);
 };
 
 exports._meta = {
