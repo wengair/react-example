@@ -13,7 +13,8 @@ const config = {
   },
   spoonacular: {
     APIKey: process.env.spoonacularAPIKey
-  }
+  },
+  postgreUrl: process.env.DATABASE_URL
 }
 
 module.exports = config

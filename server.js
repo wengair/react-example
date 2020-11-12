@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path');
 const app = express()
 const cors = require('cors')
+const config = require('./services/config')
 
 //MongoDB configuration 
 const mongoose = require('mongoose')
@@ -19,6 +20,26 @@ mongoose.connect(
     if(err) console.log(err)
     console.log('connected to the MongoDB successfully')
   })
+
+
+const { Client } = require('pg');
+console.log('config.postgreUrl', config.postgreUrl)
+const client = new Client({
+  connectionString: config.postgreUrl,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+client.connect();
+
+client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row));
+  }
+  client.end();
+});
 
 // general settings
 app.use(cors())
