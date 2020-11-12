@@ -23,21 +23,21 @@ function Landing() {
   }
   
   return (
-	<div className='landing-container'>
-		<div className='search-container'>
-		  <div className='carousel-container'>
-			<Carousel showThumbs={false} showStatus={false} showArrows={false} infiniteLoop autoPlay dynamicHeight={false}>
-			  {/* generate img tags for Carousel to show */}
-			  {imgs.map((imgurl, idx) => <img src={imgurl} alt='background' key={idx} className='slide-img' />)}
-			</Carousel>
+    <div className='landing-container'>
+      <div className='search-container'>
+        <div className='carousel-container'>
+          <Carousel showThumbs={false} showStatus={false} showArrows={false} infiniteLoop autoPlay dynamicHeight={false}>
+			      {/* generate img tags for Carousel to show */}
+			      {imgs.map((imgurl, idx) => <img src={imgurl} alt='background' id="test_landing_carousel_images" key={idx} className='slide-img' />)}
+			    </Carousel>
+		    </div>
+		    {/* I turned this search bar into a component since we'll use it twice */}
+		    <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
 		  </div>
-		  {/* I turned this search bar into a component since we'll use it twice */}
-		  <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
-		</div>
-		<div className='popular-container'>
-			<PopularRecipes />
-		</div>
-	  <style jsx='true'>
+      <div className='popular-container'>
+        <PopularRecipes />
+      </div>
+      <style jsx='true'>
         {`
         .landing-container {
           margin: 0px;
@@ -68,6 +68,7 @@ function Landing() {
           height: calc(100vh - 140px);
           object-fit: cover;
         }
+
         `}
       </style>
     </div>

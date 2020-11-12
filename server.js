@@ -1,11 +1,24 @@
 const express = require('express')
-const path = require("path")
+const path = require('path');
 const app = express()
 const cors = require('cors')
 
-// const mongoose = require('mongoose')
-// mongoose connection
-// mongoose.connect('mongodb://localhost:27017/hellodb')
+//MongoDB configuration 
+const mongoose = require('mongoose')
+const mongoUri = 'mongodb://recipeAdmin:recipe123@ds233571.mlab.com:33571/recipedb'
+
+mongoose.connect(
+  mongoUri,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  }
+)
+  .then((res, err) => {
+    if(err) console.log(err)
+    console.log('connected to the MongoDB successfully')
+  })
 
 // general settings
 app.use(cors())
@@ -18,8 +31,10 @@ app.use((req, res, next) => {
 })
 
 // API
-const endpoints = require('./services/endpoints.js') // file name doesn't affect
+const endpoints = require('./services/endpoints/recipes.js') // file name doesn't affect
 app.use('/api/v1', endpoints)
+const userEndpoints = require('./services/endpoints/users.js')
+app.use('/api/v1/users', userEndpoints)
 
 // deployment
 if(process.env.NODE_ENV === 'production') {
