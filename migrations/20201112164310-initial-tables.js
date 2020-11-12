@@ -20,7 +20,7 @@ exports.up = function(db) {
 
   const createUsers = () => db.runSql(`
     CREATE TABLE users (
-      id                  INT NOT NULL AUTO_INCREMENT,   -- a uuid
+      id                  INT NOT NULL AUTO_INCREMENT,
       email               VARCHAR(255) NOT NULL,
       password            VARCHAR(255) NOT NULL,
       first_name          VARCHAR(255),
