@@ -10,6 +10,8 @@ message_single_recipe_page = "Testing single recipe page."
 message_test_page = "Testing test page."
 message_profile_page = "Testing profile page."
 message_login_page = "Testing login page."
+message_favorite_recipes_page = "Testing favorite recipes page."
+message_allergens_page = "Testing allergens page."
 
 
 def main():
@@ -18,23 +20,28 @@ def main():
 
     # Context variables
     # Local addresses
-    addr_home = "http://127.0.0.1:3000"
-    addr_search_result_page = "http://127.0.0.1:3000/SearchResult"
-    addr_single_recipe_test = "http://127.0.0.1:3000/SingleRecipeTest"
-    addr_test = "http://127.0.0.1:3000/test"
-    addr_profile = "http://127.0.0.1:3000/profile"
-    addr_login = "http://127.0.0.1:3000/login"
+    # addr_home = "http://127.0.0.1:3000"
+    # addr_search_result_page = "http://127.0.0.1:3000/SearchResult"
+    # addr_single_recipe_test = "http://127.0.0.1:3000/SingleRecipeTest"
+    # addr_test = "http://127.0.0.1:3000/test"
+    # addr_profile = "http://127.0.0.1:3000/profile"
+    # addr_login = "http://127.0.0.1:3000/login"
+    # addr_favorite_recipes = "http://127.0.0.1:3000/favorite_recipes"
+    # addr_allergens = "http://127.0.0.1:3000/allergens"
 
     # Live addresses
-    # addr_home = "https://sous-chef-recipe.herokuapp.com/"
-    # addr_search_result_page = "https://sous-chef-recipe.herokuapp.com/SearchResult"
-    # addr_single_recipe_test = "https://sous-chef-recipe.herokuapp.com/SingleRecipeTest"
-    # addr_test = "https://sous-chef-recipe.herokuapp.com/test"
-    # addr_profile = "https://sous-chef-recipe.herokuapp.com/profile"
-    # addr_login = "https://sous-chef-recipe.herokuapp.com/login"
+    addr_home = "https://sous-chef-recipe.herokuapp.com/"
+    addr_search_result_page = "https://sous-chef-recipe.herokuapp.com/SearchResult"
+    addr_single_recipe_test = "https://sous-chef-recipe.herokuapp.com/SingleRecipeTest"
+    addr_test = "https://sous-chef-recipe.herokuapp.com/test"
+    addr_profile = "https://sous-chef-recipe.herokuapp.com/profile"
+    addr_login = "https://sous-chef-recipe.herokuapp.com/login"
+    addr_favorite_recipes = "https://sous-chef-recipe.herokuapp.com/favorite_recipes"
+    addr_allergens = "https://sous-chef-recipe.herokuapp.com/allergens"
 
     # Start Tests
     print("Test Suite Starting")
+
     print("Testing home page...")
     test_site(driver, addr_home, message_home_page)
     test_title(driver, message_home_page)
@@ -62,6 +69,19 @@ def main():
     test_site(driver, addr_profile, message_profile_page)
     test_profile_page(driver, message_profile_page)
 
+    print("Testing favorite recipes page...")
+    test_site(driver, addr_favorite_recipes, message_favorite_recipes_page)
+    test_favorite_recipes(driver, message_favorite_recipes_page)
+
+    print("Testing allergens page...")
+    test_site(driver, addr_allergens, message_allergens_page)
+    test_allergens(driver, message_allergens_page)
+
+    print("Testing static elements...")
+    test_site(driver, addr_home, message_home_page)
+    test_header(driver, message_home_page)
+    test_footer(driver, message_home_page)
+
     print("Tests Completed")
 
 
@@ -70,7 +90,7 @@ def test_site(driver, site_url, message):
     try:
         driver.get(site_url)
     except selEx.WebDriverException as e:
-        print("Test Failed: ", message, " Could not reach site.\n", e, "\n")
+        print("Test Failed: ", message, " Could not reach site.\n", e)
 
 
 # Test site title, mainly just a test of the test suite
@@ -86,7 +106,17 @@ def test_footer(driver, message):
     try:
         footer_text = driver.find_element_by_id("test_footer_text")
     except selEx.NoSuchElementException as e:
-        print("Test Failed: ", message, " Footer is not on page.\n", e, "\n")
+        print("Test Failed: ", message, " Footer is not on page.\n", e)
+
+
+# Test header,
+#   get main menu link
+def test_header(driver, message):
+    try:
+        sous_chef_image = driver.find_element_by_id("test_nav_logo_image")
+        main_menu_link = driver.find_element_by_id("test_nav_logo_text")
+    except selEx.NoSuchElementException as e:
+        print("Test Failed: ", message, " Header is not on page.\n", e)
 
 
 # Test if the search bar is present on the current page
@@ -96,7 +126,7 @@ def test_search_bar_exists(driver, message):
         search_bar = driver.find_element_by_id("test_search_bar_input")
         return search_bar
     except selEx.NoSuchElementException as e:
-        print("Test Failed: ", message, " Search Bar is not on page.\n", e, "\n")
+        print("Test Failed: ", message, " Search Bar is not on page.\n", e)
 
 
 # Test the search bar:
@@ -148,7 +178,7 @@ def test_search_bar_search(driver, search_bar, message):
         test_login_exists(driver, message_single_recipe_page)
 
     except selEx.NoSuchElementException as e:
-        print("Test Failed: ", message, " Error in search process.\n", e, "\n")
+        print("Test Failed: ", message, " Error in search process.\n", e)
 
 
 # Test if the login button is present on the current page
@@ -158,18 +188,19 @@ def test_login_exists(driver, message):
         login_button = driver.find_element_by_id("test_nav_login_button")
         return login_button
     except selEx.NoSuchElementException as e:
-        print("Test Failed: ", message, " Login button is not on page.\n", e, "\n")
+        print("Test Failed: ", message, " Login button is not on page.\n", e)
 
 
-# TODO: description
+# Check if the searchbar on a search result page is present
 def test_search_result_searchbar_exists(driver, message):
     try:
         searchbar = driver.find_element_by_id("test_search_result_searchbar")
     except selEx.NoSuchElementException as e:
-        print("Test Failed: ", message, " Local searchbar is not on page.\n", e, "\n")
+        print("Test Failed: ", message, " Local searchbar is not on page.\n", e)
 
 
-# TODO: description
+# Test the profile page
+#   Tests key elements on page
 def test_profile_page(driver, message):
     try:
         personal_button = driver.find_element_by_id("test_profile_page_personal_button")
@@ -185,7 +216,7 @@ def test_profile_page(driver, message):
 
         setup_button = driver.find_element_by_id("test_profile_page_setup_button")
     except selEx.NoSuchElementException as e:
-        print("Test Failed: ", message, " Profile Page encountered error.\n", e, "\n")
+        print("Test Failed: ", message, " Profile Page encountered error.\n", e)
 
 
 # Test the login page
@@ -198,11 +229,45 @@ def test_login_page(driver, message):
         password_input = driver.find_element_by_id("test_account_form_password_input")
         submit_button = driver.find_element_by_id("test_account_form_submit_button")
     except selEx.NoSuchElementException as e:
-        print("Test Failed: ", message, " Profile Page encountered error.\n", e, "\n")
+        print("Test Failed: ", message, " Profile Page encountered error.\n", e)
+
+
+# Test the favorite recipes page
+#   Assumes user is logged in
+#   Get key elements from page
+#   Test returned recipe
+def test_favorite_recipes(driver, message):
+    try:
+        personal_button = driver.find_element_by_id("test_favorite_recipes_page_personal_button")
+        favorite_button = driver.find_element_by_id("test_favorite_recipes_page_favorite_button")
+        allergen_button = driver.find_element_by_id("test_favorite_recipes_page_allergen_button")
+
+        user_image = driver.find_element_by_id("test_favorite_recipes_page_user_image")
+
+        recipe = driver.find_element_by_id("test_favorite_recipes_page_recipe")
+    except selEx.NoSuchElementException as e:
+        print("Test Failed: ", message, " Favorite Recipes Page encountered error.\n", e)
+
+
+# Test the allergens page
+#   Assumes user is logged in
+#   Get key elements from page
+def test_allergens(driver, message):
+    try:
+        personal_button = driver.find_element_by_id("test_allergens_page_personal_button")
+        favorite_button = driver.find_element_by_id("test_allergens_page_favorite_button")
+        allergen_button = driver.find_element_by_id("test_allergens_page_allergen_button")
+
+        user_image = driver.find_element_by_id("test_allergens_page_user_image")
+
+        search_allergen = driver.find_element_by_id("test_allergens_page_search_bar")
+        allergen_list = driver.find_element_by_id("test_allergens_page_allergen_list")
+    except selEx.NoSuchElementException as e:
+        print("Test Failed: ", message, " Allergens Page encountered error.\n", e)
+
 
 # TODO:
-    # static expansion
-    #
+    # refactor
 
 
 if __name__ == "__main__":
