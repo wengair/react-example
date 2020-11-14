@@ -24,7 +24,7 @@ function Nav() {
       <Link to='/'>
         <div className='logo-container'>
           <img src={Logo} alt='App Logo' className='logo-img' id="test_nav_logo_image"/>
-          <p className='logo-text' id="test_nav_logo_text"> </p>
+          {/*<p className='logo-text' id="test_nav_logo_text"> </p>*/}
         </div>
       </Link>
       {/* first check the path, hide button if current page is the login page */}
