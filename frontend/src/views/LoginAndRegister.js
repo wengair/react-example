@@ -89,7 +89,7 @@ function LoginAndRegister() {
     <div className='container'>
       <div className='result-wrapper'>
         <div className='form-container'>
-          <div class = "login">
+          <div className='login' id='test_login_sign_in_container'>
             <p>Welcome Back!</p>
             <p>Sign In</p>
             {/* since the form part is repeated, I put them into another component */}
@@ -107,8 +107,8 @@ function LoginAndRegister() {
               setPassword={setLoginPassword}
             />
           </div>
-          <div class = "vertical-col" />
-          <div class = "account">
+          <div className='vertical-col' />
+          <div className='account' id='test_login_create_account_container'>
             <p>New to Sous Chef?</p>
             <p>Create New Account</p>
             <ErrMessage
