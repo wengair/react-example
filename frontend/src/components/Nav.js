@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import Logo from '../images/chef_logo.png'
+import Logo from '../images/logo_pg1.svg'
 import {useLocation, Link} from 'react-router-dom'
 import {UserInfo} from './UserContext'
 import DropdownMenu from './DropdownMenu'
@@ -24,7 +24,7 @@ function Nav() {
       <Link to='/'>
         <div className='logo-container'>
           <img src={Logo} alt='App Logo' className='logo-img' id="test_nav_logo_image"/>
-          <p className='logo-text' id="test_nav_logo_text">Sous Chef</p>
+          <p className='logo-text' id="test_nav_logo_text"> </p>
         </div>
       </Link>
       {/* first check the path, hide button if current page is the login page */}
