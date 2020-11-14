@@ -37,8 +37,10 @@ function SingleRecipeView({match}) {
         }
       })
   }
-  
-  useEffect(fetchOneRecipe, [])
+
+  useEffect(() => {
+    fetchOneRecipe()
+  }, [])
 
   return (
     <div>
