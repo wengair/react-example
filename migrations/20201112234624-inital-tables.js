@@ -31,15 +31,14 @@ exports.up = function(db, callback) {
     password: {
       type: 'string',
       notNull: true,
-      unique: true,
     },
     first_name: 'string',
     last_name: 'string',
     created_at: {
-      type: 'date',
+      type: 'timestamp',
       notNull: true,
     },
-    modified_at: 'date',
+    modified_at: 'timestamp',
   }, callback)
   console.log('users table built successfully')
 
@@ -63,9 +62,10 @@ exports.up = function(db, callback) {
     // Staples = 1
     score: 'int',
     created_at: {
-      type: 'date',
+      type: 'timestamp',
       notNull: true,
     },
+    modified_at: 'timestamp',
   }, callback)
   console.log('ingredients table built successfully')
 
@@ -101,9 +101,10 @@ exports.up = function(db, callback) {
     veryHealthy: 'boolean',
     whole30: 'boolean',
     created_at: {
-      type: 'date',
+      type: 'timestamp',
       notNull: true,
     },
+    modified_at: 'timestamp',
   }, callback)
   console.log('recipes table built successfully')
 }

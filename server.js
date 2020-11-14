@@ -3,23 +3,6 @@ const path = require('path');
 const app = express()
 const cors = require('cors')
 
-//MongoDB configuration 
-const mongoose = require('mongoose')
-const mongoUri = 'mongodb://recipeAdmin:recipe123@ds233571.mlab.com:33571/recipedb'
-
-mongoose.connect(
-  mongoUri,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
-  }
-)
-  .then((res, err) => {
-    if(err) console.log(err)
-    console.log('connected to the MongoDB successfully')
-  })
-
 // general settings
 app.use(cors())
 app.use((req, res, next) => {
