@@ -13,10 +13,13 @@ function UserContext({children}) {
 
   // since React will lose all its state value if user refresh the page
   // I put user's info in local storage to keep user logged in if they refresh the page or come back next time
-  const userLogIn = (name) => {
+  const userLogIn = (userInfo) => {
+    const name = userInfo.last_name || userInfo.email.split('@')[0]
     setIsLoggedIn(true)
     setUserName(name)
-    localStorage.setItem('accessToken', name)
+    // prevent storing password to local storage
+    if(userInfo.password) delete userInfo['password']
+    localStorage.setItem('accessToken', JSON.stringify(userInfo))
   }
   
   const userLogOut = () => {
@@ -27,7 +30,7 @@ function UserContext({children}) {
 
   // check whether local storage has user's info or not
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken')
+    const accessToken = JSON.parse(localStorage.getItem('accessToken'))
     if(accessToken) {
       userLogIn(accessToken)
     }
