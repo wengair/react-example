@@ -107,9 +107,52 @@ exports.up = function(db, callback) {
     modified_at: 'timestamp',
   }, callback)
   console.log('recipes table built successfully')
+
+  db.createTable('recipe_ingredients', {
+    id: {
+      type: 'int',
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    recipe_id: {
+      type: 'int',
+      notNull: true,
+      foreignKey: {
+        name: 'recipe_id',
+        table: 'recipes',
+        rules: {
+          onDelete: 'CASCADE',
+          onUpdate: 'RESTRICT'
+        },
+        mapping: 'id'
+      }
+    },
+    ingredient_id: {
+      type: 'int',
+      notNull: true,
+      foreignKey: {
+        name: 'ingredient_id',
+        table: 'ingredients',
+        rules: {
+          onDelete: 'CASCADE',
+          onUpdate: 'RESTRICT'
+        },
+        mapping: 'id'
+      }
+    },
+    amount: 'int',
+    pretreatment: 'string',
+    created_at: {
+      type: 'date',
+      notNull: true,
+    },
+    modified_at: 'timestamp',
+  }, callback)
+  console.log('recipe_ingredients table built successfully')
 }
 
 exports.down = function(db, callback) {
+  db.dropTable('recipe_ingredients', callback)
   db.dropTable('ingredients', callback)
   db.dropTable('recipes', callback)
   db.dropTable('users', callback)
