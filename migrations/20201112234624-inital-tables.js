@@ -140,10 +140,13 @@ exports.up = function(db, callback) {
         mapping: 'id'
       }
     },
+    amount: 'int',
+    pretreatment: 'string',
     created_at: {
       type: 'date',
       notNull: true,
     },
+    modified_at: 'timestamp',
   }, callback)
   console.log('recipe_ingredients table built successfully')
 }
