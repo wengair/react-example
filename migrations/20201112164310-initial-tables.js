@@ -100,6 +100,49 @@ exports.up = function(db, callback) {
     },
   }, callback)
   console.log('recipes table built successfully')
+
+  db.createTable('recipe_ingredients', {
+    id: {
+      type: 'int',
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    recipe_id: {
+      type: 'int',
+      notNull: true,
+      foreignKey: {
+        name: 'recipe_id',
+        table: 'recipes',
+        rules: {
+          onDelete: 'CASCADE',
+          onUpdate: 'RESTRICT'
+        },
+        mapping: 'id'
+      }
+    },
+    ingredient_id: {
+      type: 'int',
+      notNull: true,
+      foreignKey: {
+        name: 'ingredient_id',
+        table: 'ingredients',
+        rules: {
+          onDelete: 'CASCADE',
+          onUpdate: 'RESTRICT'
+        },
+        mapping: 'id'
+      }
+    },
+    created_at: {
+      type: 'date',
+      notNull: true,
+    },
+  }, callback)
+  console.log('recipes table built successfully')
+
+  // INSERT INTO ingredients (name, score, created_at) VALUES ('butter', 1, NOW());
+  // INSERT INTO recipes (name, created_at) VALUES ('scrambled eggs', NOW());
+  // INSERT INTO recipe_ingredients (recipe_id, ingredient_id, created_at) VALUES (1, 1, NOW());
 }
 
 exports.down = function(db, callback) {
