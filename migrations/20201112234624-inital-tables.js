@@ -53,7 +53,7 @@ exports.up = function(db, callback) {
       notNull: true,
     },
     aisle: 'string',
-    consitency: 'string',
+    consistency: 'string',
     unit: 'string',
     // score:
     // Main_protein = 4
@@ -85,13 +85,13 @@ exports.up = function(db, callback) {
     source_name: 'string',
     source_url: 'string',
     imgurl: 'string',
-    instructions: 'string',
+    instructions: 'text',
     health_score: 'int',
     spoonacular_score: 'int',
     // pricePerServing originally is a float, needs to be turned into int before save
     price_per_serving: 'int',
     // calories originally is a float, needs to be turned into int before save
-    nutrition: 'string',
+    nutrition: 'text',
     // category
     cheap: 'boolean',
     dairy_free: 'boolean',
@@ -144,7 +144,7 @@ exports.up = function(db, callback) {
       }
     },
     amount: 'int',
-    pretreatment: 'string',
+    original_desc: 'string',
     created_at: {
       type: 'date',
       notNull: true,

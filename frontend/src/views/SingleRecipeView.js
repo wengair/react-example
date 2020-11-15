@@ -23,7 +23,7 @@ function SingleRecipeView({match}) {
 
   const fetchOneRecipe = async () => {
     const recipeId = match.params.id
-    fetch(urlJoin(config.sous.apiUrl, `/recipe/${recipeId}`), {
+    fetch(urlJoin(config.sous.apiUrl, `/recipes/${recipeId}`), {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -31,10 +31,7 @@ function SingleRecipeView({match}) {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
-        if(data.ok) {
-          setRecipe(data.recipe)
-        }
+        if(data.ok) setRecipe(data.result)
       })
   }
 
@@ -47,58 +44,57 @@ function SingleRecipeView({match}) {
       <div className='searchbar-container'>
         <SearchBar queryString={queryString} setQueryString={setQueryString} />
       </div>
-      <div className='stripe'/>
+      <div className='stripe' />
       {recipe && (
         <div className='recipe-container'>
           <div className='row'>
             <div>
-              <img src={recipe.image} alt={recipe.title} className='recipe-img' id="test_single_recipe_image"/><br />
+              <img src={recipe.imgurl} alt={recipe.name} className='recipe-img' id='test_single_recipe_image'/><br />
               <img src={LikeIcon} alt='like icon' />
             </div>
             <div>
               <div className='row'>
-                <img src={TitleIcon} alt='title icon' className='header-icon' id="test_single_recipe_title_icon"/>
-                <p className='title-text' id="test_single_recipe_title">{recipe.title}</p>
+                <img src={TitleIcon} alt='title icon' className='header-icon' id='test_single_recipe_title_icon' />
+                <p className='title-text' id='test_single_recipe_title'>{recipe.name}</p>
               </div>
               {/* title, and other information */}
               <div className='row'>
                 <div className='header-icon'>
-                  <img src={NutritionIcon} alt='nutrition icon' className='nutrition-icon'/>
+                  <img src={NutritionIcon} alt='nutrition icon' className='nutrition-icon' />
                 </div>
                 <div>
-                  <p className='header-sub-title nutrition-title'>Nutritional Facts:</p>
-                  <p className='header-content'>Per Serving:</p>
+                  <p className='header-sub-title nutrition-title'>Nutritional Facts (per serving):</p>
                   {/* only list the nutritions that we want to show to users */}
-                  {recipe.nutrition.nutrients.map(nutruent => {
+                  {recipe.nutrition.map(nutruent => {
                     if(displayedNutrients.includes(nutruent.title)) {
-                      return <p key={nutruent.title} className='header-content' id="test_single_recipe_nutrients">{nutruent.title} {nutruent.amount}{nutruent.unit} {nutruent.percentOfDailyNeeds}% DV</p>
+                      return <p key={nutruent.title} className='header-content' id='test_single_recipe_nutrients'>{nutruent.title} {nutruent.amount}{nutruent.unit} {nutruent.percentOfDailyNeeds}% DV</p>
                     }
                     else return null
                   })}
                   <div className='row recipe-misc-container'>
                     {/* calories */}
                     <div className='row recipe-misc'>
-                      <img src={CalIcon} alt='calorie icon'/>
+                      <img src={CalIcon} alt='calorie icon' />
                       <div>
                         <p className='header-sub-title'>CALORIES:</p>
-                        <p className='misc-content' id="test_single_recipe_calories">{recipe.nutrition.nutrients[0].amount} calories</p>
+                        <p className='misc-content' id='test_single_recipe_calories'>{recipe.nutrition[0].amount} calories</p>
                         <p className='misc-content'>per serving</p>
                       </div>
                     </div>
                     {/* yield */}
                     <div className='row recipe-misc'>
-                      <img src={YieldIcon} alt='yield icon'/>
+                      <img src={YieldIcon} alt='yield icon' />
                       <div>
                         <p className='header-sub-title'>YIELD:</p>
-                        <p className='misc-content' id="test_single_recipe_serving">{recipe.servings} Serving{recipe.servings > 1 ? 's' : ''}</p>
+                        <p className='misc-content' id='test_single_recipe_serving'>{recipe.servings} Serving{recipe.servings > 1 ? 's' : ''}</p>
                       </div>
                     </div>
                     {/* timing */}
                     <div className='row recipe-misc'>
-                      <img src={TimeIcon} alt='time icon'/>
+                      <img src={TimeIcon} alt='time icon' />
                       <div>
                         <p className='header-sub-title'>TIMING:</p>
-                        <p className='misc-content' id="test_single_recipe_cook_time">{recipe.cookingMinutes} mins</p>
+                        <p className='misc-content' id='test_single_recipe_cook_time'>{recipe.ready_in_minutes} mins</p>
                       </div>
                     </div>
                   </div>
@@ -109,11 +105,11 @@ function SingleRecipeView({match}) {
           <div className='row body-container'>
             <div className='instruction-container'>
               <p className='body-title'>Directions:</p>
-              {recipe.analyzedInstructions[0]?.steps.map((instruction, idx) => {
+              {recipe.instructions?.map((instruction, idx) => {
                 return (
                   <>
                     <p className='body-text'>Step {idx + 1}</p>
-                    <p className='instruction-step body-text' id="test_single_recipe_instructions">{instruction.step}</p>
+                    <p className='instruction-step body-text' id='test_single_recipe_instructions'>{instruction.step}</p>
                   </>
                 )
               })}
@@ -121,8 +117,8 @@ function SingleRecipeView({match}) {
             <div className='ingredient-container'>
               <div className='sticky'>
                 <p className='body-title'>Ingredients:</p>
-                {recipe.nutrition.ingredients.map(ingredient => {
-                  return <p key={ingredient.name} className='body-text' id="test_single_recipe_ingredients">{ingredient.name} {ingredient.amount} {ingredient.unit}</p>
+                {recipe.ingredients.map(ingredient => {
+                  return <p key={`${ingredient.name}${ingredient.amount}`} className='body-text' id='test_single_recipe_ingredients'>{ingredient.name} {ingredient.amount} {ingredient.unit}</p>
                 })}
               </div>
             </div>

@@ -16,7 +16,7 @@ function App() {
         <Nav />
         <Route path='/' exact component={Landing} />
         <Route path='/result' component={SearchResult} />
-        <Route path='/recipe/:id' component={SingleRecipeView} />
+        <Route path='/recipes/:id' component={SingleRecipeView} />
         <Route path='/login' component={LoginAndRegister} />
         <Footer />
       </UserContext>

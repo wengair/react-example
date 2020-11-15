@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 
 // API
 const endpoints = require('./services/endpoints/recipes.js') // file name doesn't affect
-app.use('/api/v1', endpoints)
+app.use('/api/v1/recipes', endpoints)
 const userEndpoints = require('./services/endpoints/users.js')
 app.use('/api/v1/users', userEndpoints)
 const ingredientEndpoints = require('./services/endpoints/ingredients.js')

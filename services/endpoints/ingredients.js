@@ -10,11 +10,20 @@ const pgConn = require('../dbConnection')
 
 router.route('/unscored').all(jsonParser).get(async (req, res) => {
   try {
-    const result = await pgConn.query(`SELECT * FROM ingredients WHERE score = NULL;`)
+    const result = await pgConn.query(`
+      SELECT 
+        id,
+        name,
+        aisle,
+        consistency,
+        unit,
+        score
+      FROM ingredients 
+      WHERE score IS NULL;`)
     if(!result.rows[0]) return res.send({message: 'All ingredients has a score!'})
     return res.send({
       ok: true,
-      result,
+      result: result.rows,
     })
   }
   catch(err) {
