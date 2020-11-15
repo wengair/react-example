@@ -18,6 +18,8 @@ const endpoints = require('./services/endpoints/recipes.js') // file name doesn'
 app.use('/api/v1', endpoints)
 const userEndpoints = require('./services/endpoints/users.js')
 app.use('/api/v1/users', userEndpoints)
+const ingredientEndpoints = require('./services/endpoints/ingredients.js')
+app.use('/api/v1/ingredients', ingredientEndpoints)
 
 // deployment
 if(process.env.NODE_ENV === 'production') {
