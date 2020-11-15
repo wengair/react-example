@@ -1,6 +1,7 @@
 from selenium import webdriver
 import selenium.common.exceptions as selEx
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 import time
 
 # Backtrace messages, pass to tests to provide context
@@ -13,31 +14,31 @@ message_login_page = "Testing login page."
 message_favorite_recipes_page = "Testing favorite recipes page."
 message_allergens_page = "Testing allergens page."
 
+# Context variables
+# Local addresses
+# addr_home = "http://127.0.0.1:3000"
+# addr_search_result_page = "http://127.0.0.1:3000/SearchResult"
+# addr_single_recipe_test = "http://127.0.0.1:3000/SingleRecipeTest"
+# addr_test = "http://127.0.0.1:3000/test"
+# addr_profile = "http://127.0.0.1:3000/profile"
+# addr_login = "http://127.0.0.1:3000/login"
+# addr_favorite_recipes = "http://127.0.0.1:3000/favorite_recipes"
+# addr_allergens = "http://127.0.0.1:3000/allergens"
+
+# Live addresses
+addr_home = "https://sous-chef-recipe.herokuapp.com/"
+addr_search_result_page = "https://sous-chef-recipe.herokuapp.com/SearchResult"
+addr_single_recipe_test = "https://sous-chef-recipe.herokuapp.com/SingleRecipeTest"
+addr_test = "https://sous-chef-recipe.herokuapp.com/test"
+addr_profile = "https://sous-chef-recipe.herokuapp.com/profile"
+addr_login = "https://sous-chef-recipe.herokuapp.com/login"
+addr_favorite_recipes = "https://sous-chef-recipe.herokuapp.com/favorite_recipes"
+addr_allergens = "https://sous-chef-recipe.herokuapp.com/allergens"
+
 
 def main():
     # Setup driver framework
     driver = webdriver.Firefox()
-
-    # Context variables
-    # Local addresses
-    # addr_home = "http://127.0.0.1:3000"
-    # addr_search_result_page = "http://127.0.0.1:3000/SearchResult"
-    # addr_single_recipe_test = "http://127.0.0.1:3000/SingleRecipeTest"
-    # addr_test = "http://127.0.0.1:3000/test"
-    # addr_profile = "http://127.0.0.1:3000/profile"
-    # addr_login = "http://127.0.0.1:3000/login"
-    # addr_favorite_recipes = "http://127.0.0.1:3000/favorite_recipes"
-    # addr_allergens = "http://127.0.0.1:3000/allergens"
-
-    # Live addresses
-    addr_home = "https://sous-chef-recipe.herokuapp.com/"
-    addr_search_result_page = "https://sous-chef-recipe.herokuapp.com/SearchResult"
-    addr_single_recipe_test = "https://sous-chef-recipe.herokuapp.com/SingleRecipeTest"
-    addr_test = "https://sous-chef-recipe.herokuapp.com/test"
-    addr_profile = "https://sous-chef-recipe.herokuapp.com/profile"
-    addr_login = "https://sous-chef-recipe.herokuapp.com/login"
-    addr_favorite_recipes = "https://sous-chef-recipe.herokuapp.com/favorite_recipes"
-    addr_allergens = "https://sous-chef-recipe.herokuapp.com/allergens"
 
     # Start Tests
     print("Test Suite Starting")
@@ -65,22 +66,22 @@ def main():
     test_site(driver, addr_login, message_login_page)
     test_login_page(driver, message_login_page)
 
-    print("Testing profile page...")
-    test_site(driver, addr_profile, message_profile_page)
-    test_profile_page(driver, message_profile_page)
-
-    print("Testing favorite recipes page...")
-    test_site(driver, addr_favorite_recipes, message_favorite_recipes_page)
-    test_favorite_recipes(driver, message_favorite_recipes_page)
-
-    print("Testing allergens page...")
-    test_site(driver, addr_allergens, message_allergens_page)
-    test_allergens(driver, message_allergens_page)
-
-    print("Testing static elements...")
-    test_site(driver, addr_home, message_home_page)
-    test_header(driver, message_home_page)
-    test_footer(driver, message_home_page)
+    # print("Testing profile page...")
+    # test_site(driver, addr_profile, message_profile_page)
+    # test_profile_page(driver, message_profile_page)
+    #
+    # print("Testing favorite recipes page...")
+    # test_site(driver, addr_favorite_recipes, message_favorite_recipes_page)
+    # test_favorite_recipes(driver, message_favorite_recipes_page)
+    #
+    # print("Testing allergens page...")
+    # test_site(driver, addr_allergens, message_allergens_page)
+    # test_allergens(driver, message_allergens_page)
+    #
+    # print("Testing static elements...")
+    # test_site(driver, addr_home, message_home_page)
+    # test_header(driver, message_home_page)
+    # test_footer(driver, message_home_page)
 
     print("Tests Completed")
 
@@ -114,7 +115,6 @@ def test_footer(driver, message):
 def test_header(driver, message):
     try:
         sous_chef_image = driver.find_element_by_id("test_nav_logo_image")
-        main_menu_link = driver.find_element_by_id("test_nav_logo_text")
     except selEx.NoSuchElementException as e:
         print("Test Failed: ", message, " Header is not on page.\n", e)
 
@@ -132,8 +132,8 @@ def test_search_bar_exists(driver, message):
 # Test the search bar:
 #   send a string and press enter
 def test_search_bar_search(driver, search_bar, message):
-    search_phrase = "pumpkin, pie"
     try:
+        search_phrase = "pumpkin, pie"
         # In the search bar element, enter the chosen search_phrase and then press enter
         search_bar.send_keys(search_phrase, Keys.RETURN)
 
@@ -225,9 +225,40 @@ def test_login_page(driver, message):
     try:
         sign_in_container = driver.find_element_by_id("test_login_sign_in_container")
         login_container = driver.find_element_by_id("test_login_create_account_container")
-        email_input = driver.find_element_by_id("test_account_form_email_input")
-        password_input = driver.find_element_by_id("test_account_form_password_input")
-        submit_button = driver.find_element_by_id("test_account_form_submit_button")
+
+        email_input = driver.find_element_by_id("test_account_form_email_input")    # Email input string
+        test_email = "no@yes.com"           # Test email address
+        email_input.send_keys(test_email)   # Input text
+
+        password_input = driver.find_element_by_id("test_account_form_password_input")  # Password input string
+        test_p = "maybe"                    #
+        password_input.send_keys(test_p)   # Input text
+
+        submit_button = driver.find_element_by_id("test_account_form_submit_button")    # Button to log in
+        submit_button.click()
+        time.sleep(5)  # Give site time to load results
+
+        # Check if logged in
+        test_site(driver, addr_home, message_login_page)
+        if "Hi, no!" in driver.page_source:
+            print("\tLogin Successful")
+        else:
+            print("\tLogin Failed")
+        account_button = driver.find_element_by_id("menu-button--menu--1")  #
+
+        # Log out
+        account_button.click()
+        log_out_button = driver.find_element_by_id("option-0--menu--1")     #
+        hover = ActionChains(driver).move_to_element(log_out_button)
+        hover.perform()
+        log_out_button.click()
+        time.sleep(5)  # Give site time to load results
+        test_login_exists(driver, message_login_page)
+        if "Log in" in driver.page_source:
+            print("\tLog Out Successful")
+        else:
+            print("\tLog Out Failed")
+
     except selEx.NoSuchElementException as e:
         print("Test Failed: ", message, " Profile Page encountered error.\n", e)
 
