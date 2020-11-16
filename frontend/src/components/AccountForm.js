@@ -28,7 +28,7 @@ function AccountForm({onSubmit, paramErrors, buttonText, email, setEmail, passwo
       <style jsx='true'>
       {`
         .container{
-          font-family: Sedan, 'Font Awesome 5 Free';
+          font-family: Sedan;
           color: #776e6e;
           font-size:18px
         }
@@ -38,7 +38,7 @@ function AccountForm({onSubmit, paramErrors, buttonText, email, setEmail, passwo
           background: #FDFDFD;
           border: 2px solid #c6b155;
           box-sizing: border-box;
-          font-family: Sedan, 'Font Awesome 5 Free';
+          font-family: Sedan;
           color: #8f8888;
           cursor: pointer;
         } 
