@@ -130,14 +130,15 @@ function LoginAndRegister() {
       </div>
       <style jsx='true'>
         {`
-        .all-container{
+        .all-container {
           height: calc(100vh - 190px);
         }
+
         .container {
           //height: calc(100vh - 190px);
           text-align:center;
           height: auto;
-                }
+        }
         
         .login {
           //text-align:left;
@@ -152,22 +153,22 @@ function LoginAndRegister() {
 
         .account {
           width: 40%;
-         top: 900px;
-         margin-right: auto;
-         margin-left: auto;
-         margin-top: auto;
-         margin-bottom: auto;
+          top: 900px;
+          margin-right: auto;
+          margin-left: auto;
+          margin-top: auto;
+          margin-bottom: auto;
         }
 	    
         .vertical-col {
           height: 100%;
           width: 0.5px;
           background: #928d8d;
-          justify-content:center;
+          justify-content: center;
         } 
         
         .result-wrapper {
-          display:inline-block;
+          display: inline-block;
           width: 921px;
           height: 430px;
           left: 151px;
@@ -179,7 +180,7 @@ function LoginAndRegister() {
         .form-container {
           margin: 100px;
           height: 50%;
-          text-align:center;
+          text-align: center;
           margin-right: auto;
           margin-left: auto;
           display: flex;
