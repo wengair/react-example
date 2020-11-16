@@ -27,11 +27,20 @@ function AccountForm({onSubmit, paramErrors, buttonText, email, setEmail, passwo
     
       <style jsx='true'>
       {`
+        .container{
+          font-family: Sedan;
+          color: #776e6e;
+          font-size:18px
+        }
+
         .form-confirm-btn{
           width: 99px;
           background: #FDFDFD;
-          border: 2px solid #B68933;
-          box-sizing: border-box;;
+          border: 2px solid #c6b155;
+          box-sizing: border-box;
+          font-family: Sedan;
+          color: #8f8888;
+          cursor: pointer;
         } 
       `}
       </style>
