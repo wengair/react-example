@@ -4,14 +4,14 @@ const app = express()
 const bodyParser = require('body-parser')
 const router = express.Router()
 const fetch = require('node-fetch')
-const config = require('./config')
+const config = require('../config')
 // Body Parser Middleware
 const jsonParser = bodyParser.json()
 // require('../models/dbSchema.js')
 // require('../models/erp.js')
-const recipes = require('../recipeRecord/findByIngredients')
-const recipeInfo = require('../recipeRecord/recipeInformationWithNutrition')
-const {endpointError, logError} = require('./util')
+const recipes = require('../../recipeRecord/findByIngredients')
+const recipeInfo = require('../../recipeRecord/recipeInformationWithNutrition')
+const {endpointError, logError} = require('../util')
 
 router.route('/findByIngredients').all(jsonParser).post(async (req, res) => {
   // const queryString = req.body.queryIngredients.join(',+')
