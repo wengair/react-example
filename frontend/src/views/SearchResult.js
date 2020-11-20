@@ -22,6 +22,7 @@ function SearchResult({location}) {
   }
 
   const fetchRecipes = async () => {
+    setPageNum(1)
     const queryIngredients = queryString.replace(', ', ',').split(',')
     fetch(urlJoin(config.sous.apiUrl, 'recipes', 'findByIngredients'), {
       method: 'POST',
