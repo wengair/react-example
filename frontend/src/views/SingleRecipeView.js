@@ -107,18 +107,19 @@ function SingleRecipeView({match}) {
               <p className='body-title'>Directions:</p>
               {recipe.instructions?.map((instruction, idx) => {
                 return (
-                  <>
+                  <div key={idx + 1}>
                     <p className='body-text'>Step {idx + 1}</p>
                     <p className='instruction-step body-text' id='test_single_recipe_instructions'>{instruction.step}</p>
-                  </>
+                  </div>
                 )
               })}
             </div>
             <div className='ingredient-container'>
               <div className='sticky'>
                 <p className='body-title'>Ingredients:</p>
-                {recipe.ingredients.map(ingredient => {
-                  return <p key={`${ingredient.name}${ingredient.amount}`} className='body-text' id='test_single_recipe_ingredients'>{ingredient.name} {ingredient.amount} {ingredient.unit}</p>
+                {recipe.ingredients.map((ingredient, idx) => {
+                  const amountDesc = /\D*\d+\D*/.test(ingredient.original_desc) ? '' : `${ingredient.amount} ${ingredient.unit} `
+                  return <p key={idx} className='body-text' id='test_single_recipe_ingredients'>{amountDesc}{ingredient.original_desc}</p>
                 })}
               </div>
             </div>

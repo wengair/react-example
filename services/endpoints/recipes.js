@@ -62,7 +62,8 @@ router.route('/:id').get(async (req, res) => {
       SELECT
         i.name,
         i.unit,
-        ri.amount
+        ri.amount,
+        ri.original_desc
       FROM recipe_ingredients AS ri
       JOIN ingredients AS i ON i.id = ri.ingredient_id
       WHERE ri.recipe_id = $1;
