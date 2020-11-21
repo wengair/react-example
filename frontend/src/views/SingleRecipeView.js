@@ -77,8 +77,8 @@ function SingleRecipeView({match}) {
                       <img src={CalIcon} alt='calorie icon' />
                       <div>
                         <p className='header-sub-title'>CALORIES:</p>
-                        <p className='misc-content' id='test_single_recipe_calories'>{recipe.nutrition[0].amount} calories</p>
-                        <p className='misc-content'>per serving</p>
+                        <p className='misc-content' id='test_single_recipe_calories'>{recipe.nutrition[0].amount} Calories</p>
+                        <p className='misc-content'>Per Serving</p>
                       </div>
                     </div>
                     {/* yield */}
@@ -94,7 +94,7 @@ function SingleRecipeView({match}) {
                       <img src={TimeIcon} alt='time icon' />
                       <div>
                         <p className='header-sub-title'>TIMING:</p>
-                        <p className='misc-content' id='test_single_recipe_cook_time'>{recipe.ready_in_minutes} mins</p>
+                        <p className='misc-content' id='test_single_recipe_cook_time'>{recipe.ready_in_minutes} Minutes</p>
                       </div>
                     </div>
                   </div>
@@ -136,7 +136,7 @@ function SingleRecipeView({match}) {
 
         .stripe {
           width: 100%;
-          height: 300px;
+          height: 440px;
           background-color: var(--c-light-brown);
           position: absolute;
           z-index: -1;
