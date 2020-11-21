@@ -67,7 +67,14 @@ function SingleRecipeView({match}) {
                   {/* only list the nutritions that we want to show to users */}
                   {recipe.nutrition.map(nutruent => {
                     if(displayedNutrients.includes(nutruent.title)) {
-                      return <p key={nutruent.title} className='header-content' id='test_single_recipe_nutrients'>{nutruent.title} {nutruent.amount}{nutruent.unit} {nutruent.percentOfDailyNeeds}% DV</p>
+                      return <p 
+                          key={nutruent.title} 
+                          className='header-container' 
+                          id='test_single_recipe_nutrients'
+                            >
+                              <div className='header-content'>{nutruent.title} {nutruent.amount}{nutruent.unit} </div>
+                              <div className='header-content'>{nutruent.percentOfDailyNeeds}% DV</div>
+                          </p>
                     }
                     else return null
                   })}
@@ -186,11 +193,15 @@ function SingleRecipeView({match}) {
           font-weight: bold;
         }
 
+        .header-container {
+          display: grid;
+          grid-template-columns: 200px auto;
+        }
+
         .header-content {
           font-family: Shanti;
           font-size: 15px;
           color: #584E4E;
-          margin: 10px 0px;
         }
 
         .recipe-misc-container {
