@@ -70,14 +70,14 @@ function SingleRecipeView({match}) {
                       return <p 
                           key={nutruent.title} 
                           className='header-container' 
-                          id='test_single_recipe_nutrients'
-                            >
+                          id='test_single_recipe_nutrients'>
                               <div className='header-content'>{nutruent.title} {nutruent.amount}{nutruent.unit} </div>
                               <div className='header-content'>{nutruent.percentOfDailyNeeds}% DV</div>
                           </p>
                     }
                     else return null
                   })}
+                  <p className='daily-value'>*Percent Daily Values are based on a 2,000 calorie diet. </p>
                   <div className='row recipe-misc-container'>
                     {/* calories */}
                     <div className='row recipe-misc'>
@@ -143,11 +143,17 @@ function SingleRecipeView({match}) {
 
         .stripe {
           width: 100%;
-          height: 440px;
+          height: 460px;
           background-color: var(--c-light-brown);
           position: absolute;
           z-index: -1;
           opacity: 0.6;
+        }
+
+        .daily-value {
+          font-family: Shanti;
+          font-size: 13px;
+          color: #584E4E;
         }
 
         .recipe-container {
