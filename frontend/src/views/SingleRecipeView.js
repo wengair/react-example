@@ -75,18 +75,25 @@ function SingleRecipeView({match}) {
                   {/* only list the nutritions that we want to show to users */}
                   {recipe.nutrition.map(nutruent => {
                     if(displayedNutrients.includes(nutruent.title)) {
-                      return <p key={nutruent.title} className='header-content' id='test_single_recipe_nutrients'>{nutruent.title} {nutruent.amount}{nutruent.unit} {nutruent.percentOfDailyNeeds}% DV</p>
+                      return <p 
+                        key={nutruent.title} 
+                        className='header-container' 
+                        id='test_single_recipe_nutrients'>
+                          <div className='header-content'>{nutruent.title} {nutruent.amount}{nutruent.unit} </div>
+                          <div className='header-content'>{nutruent.percentOfDailyNeeds}% DV</div>
+                        </p>
                     }
                     else return null
                   })}
+                  <p className='daily-value'>*Percent Daily Values are based on a 2,000 calorie diet. </p>
                   <div className='row recipe-misc-container'>
                     {/* calories */}
                     <div className='row recipe-misc'>
                       <img src={CalIcon} alt='calorie icon' />
                       <div>
                         <p className='header-sub-title'>CALORIES:</p>
-                        <p className='misc-content' id='test_single_recipe_calories'>{recipe.nutrition[0].amount} calories</p>
-                        <p className='misc-content'>per serving</p>
+                        <p className='misc-content' id='test_single_recipe_calories'>{recipe.nutrition[0].amount} Calories</p>
+                        <p className='misc-content'>Per Serving</p>
                       </div>
                     </div>
                     {/* yield */}
@@ -102,7 +109,7 @@ function SingleRecipeView({match}) {
                       <img src={TimeIcon} alt='time icon' />
                       <div>
                         <p className='header-sub-title'>TIMING:</p>
-                        <p className='misc-content' id='test_single_recipe_cook_time'>{recipe.ready_in_minutes} mins</p>
+                        <p className='misc-content' id='test_single_recipe_cook_time'>{recipe.ready_in_minutes} Minutes</p>
                       </div>
                     </div>
                   </div>
@@ -118,7 +125,7 @@ function SingleRecipeView({match}) {
                   <div key={idx + 1}>
                     <p className='body-text'>Step {idx + 1}</p>
                     <p className='instruction-step' id='test_single_recipe_instructions'>{instruction.step}</p>
-                  </>
+                  </div>
                 )
               })}
             </div>
@@ -145,11 +152,17 @@ function SingleRecipeView({match}) {
 
         .stripe {
           width: 100%;
-          height: 300px;
+          height: 460px;
           background-color: var(--c-light-brown);
           position: absolute;
           z-index: -1;
           opacity: 0.6;
+        }
+
+        .daily-value {
+          font-family: Shanti;
+          font-size: 13px;
+          color: #584E4E;
         }
 
         .recipe-container {
@@ -195,11 +208,15 @@ function SingleRecipeView({match}) {
           font-weight: bold;
         }
 
+        .header-container {
+          display: grid;
+          grid-template-columns: 200px auto;
+        }
+
         .header-content {
           font-family: Shanti;
           font-size: 15px;
           color: #584E4E;
-          margin: 10px 0px;
         }
 
         .recipe-misc-container {

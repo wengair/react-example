@@ -28,7 +28,7 @@ function SearchBar({onSubmit, queryString, setQueryString}) {
           .search-bar {
             font-family: system-ui, 'Font Awesome 5 Free';
             font-size: 20px;
-            width: 118%;
+            width: 130%;
             height: 30px;
             z-index: 1;
             padding: 1px 200px 0px 11px;
