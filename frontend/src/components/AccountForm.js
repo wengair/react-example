@@ -20,7 +20,7 @@ function AccountForm({onSubmit, paramErrors, buttonText, email, setEmail, passwo
           <p><input type="text" placeholder='Email' id="test_account_form_email_input" value={email} onChange={handleEmailChange} /></p>
         </FormField>
         <FormField errorMsg={paramErrors?.password[0]?.message}>
-          <p><input type="text" placeholder='Password' id="test_account_form_password_input" value={password} onChange={handlePassChange} /></p>
+          <p><input type="password" placeholder='Password' id="test_account_form_password_input" value={password} onChange={handlePassChange} /></p>
         </FormField>
         <button type='submit' className='form-confirm-btn' id="test_account_form_submit_button"> {buttonText} </button>
       </form>
