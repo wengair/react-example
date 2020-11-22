@@ -125,7 +125,7 @@ function SingleRecipeView({match}) {
                   <div key={idx + 1}>
                     <p className='body-text'>Step {idx + 1}</p>
                     <p className='instruction-step' id='test_single_recipe_instructions'>{instruction.step}</p>
-                  </>
+                  </div>
                 )
               })}
             </div>
