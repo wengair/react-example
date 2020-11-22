@@ -76,12 +76,12 @@ function SingleRecipeView({match}) {
                   {recipe.nutrition.map(nutruent => {
                     if(displayedNutrients.includes(nutruent.title)) {
                       return <p 
-                          key={nutruent.title} 
-                          className='header-container' 
-                          id='test_single_recipe_nutrients'>
-                              <div className='header-content'>{nutruent.title} {nutruent.amount}{nutruent.unit} </div>
-                              <div className='header-content'>{nutruent.percentOfDailyNeeds}% DV</div>
-                          </p>
+                        key={nutruent.title} 
+                        className='header-container' 
+                        id='test_single_recipe_nutrients'>
+                          <div className='header-content'>{nutruent.title} {nutruent.amount}{nutruent.unit} </div>
+                          <div className='header-content'>{nutruent.percentOfDailyNeeds}% DV</div>
+                        </p>
                     }
                     else return null
                   })}
