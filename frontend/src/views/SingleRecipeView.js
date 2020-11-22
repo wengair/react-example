@@ -117,8 +117,8 @@ function SingleRecipeView({match}) {
                 return (
                   <div key={idx + 1}>
                     <p className='body-text'>Step {idx + 1}</p>
-                    <p className='instruction-step body-text' id='test_single_recipe_instructions'>{instruction.step}</p>
-                  </div>
+                    <p className='instruction-step' id='test_single_recipe_instructions'>{instruction.step}</p>
+                  </>
                 )
               })}
             </div>
@@ -237,16 +237,23 @@ function SingleRecipeView({match}) {
         .ingredient-container {
           width: 18%;
         }
-
-        .body-text {
+        .ingredient-text{
           font-family: Shanti;
           font-size: 20px;
           color: #584E4E;
         }
 
+        .body-text {
+          font-family: Shanti;
+          font-size: 20px;
+          color: #584E4E;
+          font-weight: bold;
+        }
+
         .instruction-step {
           margin-top: 35px;
           margin-bottom: 60px;
+          font-size: 20px;
         }
 
         .sticky {
