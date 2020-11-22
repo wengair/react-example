@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import SearchBar from '../components/SearchBar'
 import {config} from '../lib/config'
+import {useHistory} from 'react-router-dom'
 // icons
 import TitleIcon from '../images/pg3_recipename.svg'
 import NutritionIcon from '../images/pg3_nutritionfacts.png'
@@ -11,6 +12,7 @@ import LikeIcon from '../images/like.svg'
 const urlJoin = require('url-join')
 
 function SingleRecipeView({match}) {
+  const history = useHistory()
   const [queryString, setQueryString] = useState()
   const [recipe, setRecipe] = useState()
   const displayedNutrients = [
@@ -39,10 +41,16 @@ function SingleRecipeView({match}) {
     fetchOneRecipe()
   }, [])
 
+  const submitHandler = (e) => {
+    // e.preventDefault()
+    // when user hit enter, redirect them to /result page with what they typed in the search bar
+    history.push({pathname: `/result`, state: {queryString: queryString}})
+  }
+
   return (
     <div>
       <div className='searchbar-container'>
-        <SearchBar queryString={queryString} setQueryString={setQueryString} />
+        <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
       </div>
       <div className='stripe' />
       {recipe && (
@@ -107,9 +115,9 @@ function SingleRecipeView({match}) {
               <p className='body-title'>Directions:</p>
               {recipe.instructions?.map((instruction, idx) => {
                 return (
-                  <>
+                  <div key={idx + 1}>
                     <p className='body-text'>Step {idx + 1}</p>
-                    <p className='instruction-step ' id='test_single_recipe_instructions'>{instruction.step}</p>
+                    <p className='instruction-step' id='test_single_recipe_instructions'>{instruction.step}</p>
                   </>
                 )
               })}
@@ -117,8 +125,9 @@ function SingleRecipeView({match}) {
             <div className='ingredient-container'>
               <div className='sticky'>
                 <p className='body-title'>Ingredients:</p>
-                {recipe.ingredients.map(ingredient => {
-                  return <p key={`${ingredient.name}${ingredient.amount}`} className='ingredient-text' id='test_single_recipe_ingredients'>{ingredient.name} {ingredient.amount} {ingredient.unit}</p>
+                {recipe.ingredients.map((ingredient, idx) => {
+                  const amountDesc = /\D*\d+\D*/.test(ingredient.original_desc) ? '' : `${ingredient.amount} ${ingredient.unit} `
+                  return <p key={idx} className='body-text' id='test_single_recipe_ingredients'>{amountDesc}{ingredient.original_desc}</p>
                 })}
               </div>
             </div>
