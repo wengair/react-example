@@ -12,7 +12,7 @@ router.route('/findByIngredients').all(jsonParser).post(async (req, res) => {
   try {
     const queryIngredients = req.body.queryIngredients
     // SQL: WHERE name SIMILAR TO '%string1|string2%'
-    const newQuery = `%(${queryIngredients.join('|')})%`
+    const newQuery = `%(${queryIngredients.join('|').toLowerCase()})%`
     const findIngredientResults = await pgConn.query(`SELECT * FROM ingredients WHERE name SIMILAR TO $1;`,[newQuery])
     const ingredientIds = findIngredientResults.rows.map(ingredient => ingredient.id)
     const results = await pgConn.query(`
@@ -62,7 +62,8 @@ router.route('/:id').get(async (req, res) => {
       SELECT
         i.name,
         i.unit,
-        ri.amount
+        ri.amount,
+        ri.original_desc
       FROM recipe_ingredients AS ri
       JOIN ingredients AS i ON i.id = ri.ingredient_id
       WHERE ri.recipe_id = $1;

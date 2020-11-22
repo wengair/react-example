@@ -31,7 +31,7 @@ function SearchBar({onSubmit, queryString, setQueryString}) {
             width: 130%;
             height: 30px;
             z-index: 1;
-            padding: 0px 15px;
+            padding: 1px 200px 0px 11px;
             border-radius: 20px;
             border: 3.5px solid #D2AE69;
             filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
