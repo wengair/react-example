@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import SearchBar from '../components/SearchBar'
 import {config} from '../lib/config'
+import {useHistory} from 'react-router-dom'
 // icons
 import TitleIcon from '../images/pg3_recipename.svg'
 import NutritionIcon from '../images/pg3_nutritionfacts.png'
@@ -11,6 +12,7 @@ import LikeIcon from '../images/like.svg'
 const urlJoin = require('url-join')
 
 function SingleRecipeView({match}) {
+  const history = useHistory()
   const [queryString, setQueryString] = useState()
   const [recipe, setRecipe] = useState()
   const displayedNutrients = [
@@ -39,10 +41,16 @@ function SingleRecipeView({match}) {
     fetchOneRecipe()
   }, [])
 
+  const submitHandler = (e) => {
+    // e.preventDefault()
+    // when user hit enter, redirect them to /result page with what they typed in the search bar
+    history.push({pathname: `/result`, state: {queryString: queryString}})
+  }
+
   return (
     <div>
       <div className='searchbar-container'>
-        <SearchBar queryString={queryString} setQueryString={setQueryString} />
+        <SearchBar onSubmit={submitHandler} queryString={queryString} setQueryString={setQueryString} />
       </div>
       <div className='stripe' />
       {recipe && (
