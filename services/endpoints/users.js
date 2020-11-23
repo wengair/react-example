@@ -1,44 +1,34 @@
 const express = require('express')
 const router = express.Router()
 const {endpointError, logError, generateParamErroes} = require('../util')
-const config = require('../config')
+const validate = require('../validation')
+// DB connection to Heroku's PostgreSQL
+const pgConn = require('../dbConnection')
 
 // Body Parser Middleware
 const bodyParser = require('body-parser')
 const jsonParser = bodyParser.json()
 
-// DB
-const mongoose = require('mongoose')
-// For inheriting the DB schema models, we should require the schema files in the models folder 
-require('../../models/users')
-// Once the schema file is loaded we need to instantiate the model using mongoose package like this
-const Users = mongoose.model('users') //check for this 'data' variable in /models/dbSchema.js then u can understand
-
-const { Client } = require('pg');
-const client = new Client({
-  connectionString: config.postgreUrl,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
-
-client.connect();
-
 router.route('/login').all(jsonParser).post(async (req, res) => {
-  const userInfo = req.body.userInfo
-  // mongoose needs to use object to do the query
-  const query = {
-    email: userInfo.email,
-    password: userInfo.password,
+  const validationDefinition = {
+    email: [
+      validate.notEmpty,
+    ],
+    password: [
+      validate.notEmpty,
+    ],
   }
+  
+  const errorMsg = await validate.run(validationDefinition, req.body.userInfo)
+  if (errorMsg) return res.status(400).json(errorMsg)
+
   try {
-    // search DB by matching user's email and password
-    const queryResult = await Users.find(query).exec()
-    // if queryResult === [] means email or password is incorrect and needs to return an error message
-    if(!queryResult[0]) return endpointError(res, 400, 'BadRequest', 'Incorrect email or password.')
+    const userInfo = req.body.userInfo
+    const result = await pgConn.query(`SELECT * FROM users WHERE email = $1 and password = $2;`, [userInfo.email, userInfo.password])
+    if(!result.rows[0]) return endpointError(res, 400, 'BadRequest', 'Incorrect email or password.')
     return res.send({
       ok: true,
-      userInfo: queryResult[0],
+      userInfo: result.rows[0],
     })
   }
   catch(err) {
@@ -49,44 +39,28 @@ router.route('/login').all(jsonParser).post(async (req, res) => {
 })
 
 router.route('/register').all(jsonParser).post(async (req, res) => {
-  const userInfo = req.body.userInfo
-  const newUserInfo = new Users({
-    email: userInfo.email,
-    password: userInfo.password,
-    first_name: userInfo.first_name,
-    last_name: userInfo.last_name,
-    Created: Date.now(),
-    Modified: Date.now(),
-  })
-
-  const validationResult = newUserInfo.validateSync()
-  if (validationResult) return res.status(400).json(generateParamErroes(validationResult))
-
+  const validationDefinition = {
+    email: [
+      validate.notEmpty,
+      validate.validEmailFormat,
+      validate.uniqueEmail,
+    ],
+    password: [
+      validate.notEmpty,
+      validate.noSpace,
+    ],
+  }
+  
+  const errorMsg = await validate.run(validationDefinition, req.body.userInfo)
+  if (errorMsg) return res.status(400).json(errorMsg)
+  
   try {
-    await Users.create(newUserInfo)
+    const userInfo = req.body.userInfo
+    const now = new Date()
+    await pgConn.query(`INSERT INTO users (email, password, created_at) VALUES ($1, $2, $3);`, [userInfo.email, userInfo.password, now])
     return res.send({ok: true})
   }
   catch(err) {
-    // duplicated email error
-    if(err.errors) return res.status(400).json(generateParamErroes(err))
-    // unexpected errors
-    logError(500, 'Exception occurs in endpoint while searching for user info by email and password', err)
-    return endpointError(res, 500, 'InternalServerError', 'Something went wrong and the user info could not be found by email and password.')
-  }
-})
-
-router.route('/test').all(jsonParser).post(async (req, res) => {
-  const userInfo = req.body.userInfo
-  try {
-    const result = await client.query(`SELECT * FROM users`)
-    return res.send({
-      ok: true,
-      result: result.rows,
-    })
-  }
-  catch(err) {
-    // duplicated email error
-    if(err.errors) return res.status(400).json(generateParamErroes(err))
     // unexpected errors
     logError(500, 'Exception occurs in endpoint while searching for user info by email and password', err)
     return endpointError(res, 500, 'InternalServerError', 'Something went wrong and the user info could not be found by email and password.')

@@ -31,15 +31,14 @@ exports.up = function(db, callback) {
     password: {
       type: 'string',
       notNull: true,
-      unique: true,
     },
     first_name: 'string',
     last_name: 'string',
     created_at: {
-      type: 'date',
+      type: 'timestamp',
       notNull: true,
     },
-    modified_at: 'date',
+    modified_at: 'timestamp',
   }, callback)
   console.log('users table built successfully')
 
@@ -54,13 +53,19 @@ exports.up = function(db, callback) {
       notNull: true,
     },
     aisle: 'string',
-    consitency: 'string',
+    consistency: 'string',
     unit: 'string',
+    // score:
+    // Main_protein = 4
+    // Main_greens = 3
+    // Condiments = 2
+    // Staples = 1
     score: 'int',
     created_at: {
-      type: 'date',
+      type: 'timestamp',
       notNull: true,
     },
+    modified_at: 'timestamp',
   }, callback)
   console.log('ingredients table built successfully')
 
@@ -76,28 +81,33 @@ exports.up = function(db, callback) {
     },
     // misc
     servings: 'int',
-    readyInMinutes: 'int',
-    sourceName: 'string',
-    sourceUrl: 'string',
-    spoonacularSourceUrl: 'string',
-    healthScore: 'int',
-    spoonacularScore: 'int',
-    pricePerServing: 'int',
+    ready_in_minutes: 'int',
+    source_name: 'string',
+    source_url: 'string',
+    imgurl: 'string',
+    instructions: 'text',
+    health_score: 'int',
+    spoonacular_score: 'int',
+    // pricePerServing originally is a float, needs to be turned into int before save
+    price_per_serving: 'int',
+    // calories originally is a float, needs to be turned into int before save
+    nutrition: 'text',
     // category
     cheap: 'boolean',
-    dairyFree: 'boolean',
-    glutenFree: 'boolean',
+    dairy_free: 'boolean',
+    gluten_free: 'boolean',
     ketogenic: 'boolean',
-    lowFodmap: 'boolean',
+    low_fodmap: 'boolean',
     sustainable: 'boolean',
     vegan: 'boolean',
     vegetarian: 'boolean',
-    veryHealthy: 'boolean',
+    very_healthy: 'boolean',
     whole30: 'boolean',
     created_at: {
-      type: 'date',
+      type: 'timestamp',
       notNull: true,
     },
+    modified_at: 'timestamp',
   }, callback)
   console.log('recipes table built successfully')
 
@@ -133,20 +143,19 @@ exports.up = function(db, callback) {
         mapping: 'id'
       }
     },
+    amount: 'int',
+    original_desc: 'string',
     created_at: {
       type: 'date',
       notNull: true,
     },
+    modified_at: 'timestamp',
   }, callback)
-  console.log('recipes table built successfully')
-
-  // INSERT INTO ingredients (name, score, created_at) VALUES ('butter', 1, NOW());
-  // INSERT INTO recipes (name, created_at) VALUES ('scrambled eggs', NOW());
-  // INSERT INTO recipe_ingredients (recipe_id, ingredient_id, created_at) VALUES (1, 1, NOW());
+  console.log('recipe_ingredients table built successfully')
 }
 
 exports.down = function(db, callback) {
-
+  db.dropTable('recipe_ingredients', callback)
   db.dropTable('ingredients', callback)
   db.dropTable('recipes', callback)
   db.dropTable('users', callback)
